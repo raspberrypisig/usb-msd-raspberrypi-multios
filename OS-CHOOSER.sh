@@ -1,5 +1,15 @@
-#!/usr/bin/env bash
-set -e
+#!/bin/bash
+#set -x
+#set -e
+#mount -t proc proc /proc
+#sleep 10
+#mount -t sysfs sys /sys
+#mount -t tmpfs tmp /tmp
+
+#mount /boot
+#mount / -o remount,ro
+
+
 declare -A oslist
 str=
 for i in {2..10}
@@ -16,13 +26,14 @@ fi
 umount $fat
 done
 #echo "${!oslist[@]}"
-echo $str
+#echo $str
+
+#sleep 60
 #exit 0
 #sleep 10
-clear
+#clear
 #a="one two three  four fix mix"
-CHOICE=$(whiptail --title "Choose OS" --menu " "  --nocancel --noitem   20 70 5 \
-$str 3>&1 1>&2 2>&3 )
+CHOICE=$(whiptail --title "Choose OS" --menu " "  --nocancel --noitem   20 70 5 $str 3>&1 1>&2 2>&3)
 #echo $CHOICE
-echo ${oslist[$CHOICE]}
+#echo ${oslist[$CHOICE]}
 sudo reboot ${oslist[$CHOICE]}
