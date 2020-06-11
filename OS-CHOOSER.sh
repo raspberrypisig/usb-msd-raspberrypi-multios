@@ -1,3 +1,4 @@
+ 
 #!/bin/bash
 #set -x
 #set -e
@@ -9,8 +10,8 @@
 #mount /boot
 #mount / -o remount,ro
 
-
 declare -A oslist
+options=()
 str=
 for i in {2..10}
 do
@@ -21,10 +22,12 @@ if [ -f  "$fat/NAME" ];
 then
   os=$(cat "$fat/NAME")
   oslist["$os"]=$i
-  str="$str $os $os" 
+  str="$str $os $os"
+  options+=("$os" "$os") 
 fi
 umount $fat
 done
+
 #echo "${!oslist[@]}"
 #echo $str
 
@@ -33,7 +36,7 @@ done
 #sleep 10
 #clear
 #a="one two three  four fix mix"
-CHOICE=$(whiptail --title "Choose OS" --menu " "  --nocancel --noitem   20 70 5 $str 3>&1 1>&2 2>&3)
+CHOICE=$(whiptail --title "Choose OS" --menu " "  --nocancel --noitem   20 70 5 "${options[@]}" 3>&1 1>&2 2>&3)
 #echo $CHOICE
 #echo ${oslist[$CHOICE]}
 sudo reboot ${oslist[$CHOICE]}
