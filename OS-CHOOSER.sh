@@ -12,7 +12,6 @@
 
 declare -A oslist
 options=()
-str=
 for i in {2..10}
 do
 fat=/tmp/fat
@@ -22,7 +21,6 @@ if [ -f  "$fat/NAME" ];
 then
   os=$(cat "$fat/NAME")
   oslist["$os"]=$i
-  str="$str $os $os"
   options+=("$os" "$os") 
 fi
 umount $fat
