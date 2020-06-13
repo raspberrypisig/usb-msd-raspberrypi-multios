@@ -38,4 +38,17 @@ from menu, I change root=/dev/sda{root_part} in cmdline.txt on /dev/sda4 and "re
 Create a NAME file in the fat partition with the name of the Distro.
 If partition number < 4, then do reboot <boot_part>. Else do as stated in problem 1.
 
+# Commands
+
+losetup --show -Pf 2020-raspbian.img
+mkdir /raspbian
+mkdir /raspbianboot
+mount -o ro /dev/loop1p1 /raspbianboot
+mount -o ro /dev/loop1p2 /raspbian
+cp -rv /raspbianboot/* /media/sdb1/
+rsync -avu /raspbian/ /media/sdb12/
+
+
+
+
 
