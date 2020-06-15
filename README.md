@@ -50,6 +50,7 @@ You will need to alter each OS image you add.
 FAT32 changes
 
 * Create a file called NAME with the name you would like to appear in the OS selection menu
+* edit cmdline.txt
 
 EXT4 changes
 * Change /etc/fstab to use the correct partitions for / and /boot 
