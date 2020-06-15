@@ -58,6 +58,34 @@ EXT4 changes
 
 * change /etc/fstab to use the correct partitions for / and /boot
 
+# First Time Boot
+
+If all is setup properly, you should boot the first-time so that:
+
+```
+$ findmnt /
+should see /dev/sda2
+
+$ findmnt /boot
+should see /dev/sda1
+```
+
+If you run 
+
+```sh
+bash /firstboot.sh
+```
+
+It will subsequently boot into OS selection menu.
+
+
+
+
+
+
+
+
+
 
 # How it works
 
