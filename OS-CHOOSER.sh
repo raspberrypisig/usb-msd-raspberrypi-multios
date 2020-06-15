@@ -11,22 +11,23 @@
 
 SACRIFICIAL_BOOTPARTITION=3
 TEMP_DIR=/tmp
+SACRIFICIAL_MOUNT_DIR="${TEMP_DIR}/boot"
 
 declare -A oslist
 options=()
 str=
 for i in {2..10}
 do
-mkdir -p "${TEMP_DIR}"
-mount "/dev/sda${SACRIFICIAL_BOOTPARTITION}" $fat
-if [ -f  "$fat/NAME" ];
+mkdir -p TEMP_DIR
+mount "/dev/sda${SACRIFICIAL_BOOTPARTITION}" $TEMP_DIR
+if [ -f  "${TEMP_DIR}/NAME" ];
 then
-  os=$(cat "$fat/NAME")
+  os=$(cat "${TEMP_DIR}/NAME")
   oslist["$os"]=$i
   str="$str $os $os"
   options+=("$os" "$os") 
 fi
-umount "${TEMP_DIR}"
+umount $TEMP_DIR
 done
 
 #echo "${!oslist[@]}"
@@ -45,12 +46,12 @@ echo $bootpart
 if [ $bootpart -gt 4 ];
 then
   bootpart=$(( bootpart + 1  ))
-  mkdir /tmp/mnt
-  mount "/dev/sda3 /tmp/mnt
+  mkdir -p "${TEMP_DIR}"
+  mount "/dev/sda${SACRIFICIAL_BOOTPARTITION}" "${TEMP_DIR}"
   sed -i -r "s/root=([^ ]*) /root=\/dev\/sda${bootpart} /" /tmp/mnt/cmdline.txt
-  cat /tmp/mnt/cmdline.txt
+  #cat /tmp/mnt/cmdline.txt
   #sleep 10
-  umount /tmp/mnt/cmdline.txt
+  umount "${TEMP_DIR}/cmdline.txt"
   bootpart=4
 fi
 sudo reboot $bootpart
