@@ -25,11 +25,12 @@ The first three partitions are special partitions. Special partitions don't have
 
 ### Partition 1 
 
-* Grab OS-CHOOSER.sh from [here](https://raw.githubusercontent.com/raspberrypisig/usb-msd-raspberrypi-multios/master/OS-CHOOSER.sh) and place on partition 1
 * Grab firstboot.sh from [here](https://raw.githubusercontent.com/raspberrypisig/usb-msd-raspberrypi-multios/master/firstboot.sh) and put on partition 1 
 * Grab cmdline.txt from [here](https://github.com/raspberrypisig/usb-msd-raspberrypi-multios/raw/master/cmdline.txt) and replace file on partition 1
 
 ### Partition 2
+
+* Grab OS-CHOOSER.sh from [here](https://raw.githubusercontent.com/raspberrypisig/usb-msd-raspberrypi-multios/master/OS-CHOOSER.sh) and place on partition 1
 * Grab oschooser.service from [here](https://raw.githubusercontent.com/raspberrypisig/usb-msd-raspberrypi-multios/master/oschooser.service)  and put in /etc/systemd/system 
 * Grab fstab from [here](https://github.com/raspberrypisig/usb-msd-raspberrypi-multios/raw/master/fstab) and replace file at etc/fstab
 
