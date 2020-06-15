@@ -26,10 +26,18 @@ The first three partitions are special partitions. Special partitions don't have
 
 ### Partition 1 
 
-* Has a script called OS-CHOOSER.sh
-* Has a service run at boot called OS-CHOOSER.service which causes OS-CHOOSER.sh to run instead of a getty terminal
-* To speed boot time to OS Selection Menu, run firstboot.sh from first partition.
+* Grab script from [here](https://raw.githubusercontent.com/raspberrypisig/usb-msd-raspberrypi-multios/master/OS-CHOOSER.sh)
+  and put in /OS-CHOOSER.sh
+* Grab script from [here](https://raw.githubusercontent.com/raspberrypisig/usb-msd-raspberrypi-multios/master/oschooser.service)
+  and put in /etc/systemd/system 
+* Grab script from [here](https://raw.githubusercontent.com/raspberrypisig/usb-msd-raspberrypi-multios/master/firstboot.sh) and
+  put in /firstboot.sh 
 * Change cmdline.txt so that root=/dev/sda2
+* When you first boot to this partition, run
+
+  ```sh
+  bash /firstboot.sh
+  ```
 
 ### Partition 2
 
