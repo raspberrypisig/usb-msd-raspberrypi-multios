@@ -17,6 +17,7 @@ PARTITION 3:  Same as contents of Partition 1, ie boot partition of Raspberry Pi
 To add Raspberry PI OS Desktop as first OS
 
 PARTITION 4: FAT32 boot paritition of Raspberry PI OS Desktop
+
 PARTITION 5: Ext3/4 partition of Raspberry PI OS Desktop
 
 # Preparing the special partitions
