@@ -9,19 +9,21 @@
 #mount /boot
 #mount / -o remount,ro
 
-SACRIFICIAL_BOOTPARTITION=3
+USB_BLOCK_DEVICE=/dev/sda
+SACRIFICIAL_BOOTPARTITION_NUMBER=3
+SACRIFICIAL_BOOTPARTITION="${USB_BLOCK_DEVICE}${SACRIFICIAL_BOOTPARTITION_NUMBER}"
 TEMP_DIR=/tmp
 SACRIFICIAL_MOUNT_DIR="${TEMP_DIR}/boot"
+TARGET_MOUNT_DIR="${TEMP_DIR}/targetboot"
 
 declare -A oslist
 options=()
 
-fat_partitions=$(parted -l /dev/sda|grep fat|sed -n '3,$p'|awk '{print $1}')
+fat_partitions=$(parted -l $USB_BLOCK_DEVICE|grep fat|sed -n '3,$p'|awk '{print $1}')
 
 for i in $fat_partitions
 do
-mkdir -p TEMP_DIR
-mount "/dev/sda$i" $TEMP_DIR
+mount "${USB_BLOCK_DEVICE}$i" $TEMP_DIR
 if [ -f  "${TEMP_DIR}/NAME" ];
 then
   os=$(cat "${TEMP_DIR}/NAME")
@@ -32,30 +34,23 @@ umount $TEMP_DIR
 done
 
 #echo "${!oslist[@]}"
-#echo $str
 
-#sleep 60
-#exit 0
-#sleep 10
-#clear
-#a="one two three  four fix mix"
 CHOICE=$(whiptail --title "Choose OS" --menu " "  --nocancel --noitem   20 70 5 "${options[@]}" 3>&1 1>&2 2>&3)
-#set -x
-bootpart="${oslist[$CHOICE]}"
-echo $bootpart
-#sleep 3
-if [ $bootpart -gt 4 ];
-then
-  bootpart=$(( bootpart + 1  ))
-  mkdir -p "${TEMP_DIR}"
-  mount "/dev/sda${SACRIFICIAL_BOOTPARTITION}" "${TEMP_DIR}"
-  sed -i -r "s/root=([^ ]*) /root=\/dev\/sda${bootpart} /" /tmp/mnt/cmdline.txt
-  #cat /tmp/mnt/cmdline.txt
-  #sleep 10
-  umount "${TEMP_DIR}/cmdline.txt"
-  bootpart=4
-fi
-sudo reboot $bootpart
 #echo $CHOICE
 #echo ${oslist[$CHOICE]}
-#sudo reboot ${oslist[$CHOICE]}
+bootpart="${oslist[$CHOICE]}"
+echo $bootpart
+
+linuxpart=$(( bootpart + 1  ))
+mkdir -p "${SACRIFICIAL_MOUNT_DIR}"
+mkdir -p "${TARGET_MOUNT_DIR}"
+mount "$SACRIFICIAL_BOOTPARTITION" $SACRIFICIAL_MOUNT_DIR
+mount "${USB_BLOCK_DEVICE}$TARGET_MOUNT_DIR" $TARGET_MOUNT_DIR
+sed -i -r "s/root=([^ ]*) /root=${USB_BLOCK_DEVICE}\/${linuxpart} /" "${SACRIFICIAL_MOUNT_DIR}/cmdline.txt"
+cp "${TARGET_MOUNT_DIR}/kernelv7l.img" "${SACRIFICIAL_MOUNT_DIR}/${bootpart}.img"
+sed -i -r "s/kernel=(.*)$/kernel=${bootpart}.img/" "${SACRIFICIAL_MOUNT_DIR}/config.txt"
+umount "${SACRIFICIAL_MOUNT_DIR}"
+umount "${TARGET_MOUNT_DIR}"
+sudo reboot $SACRIFICIAL_BOOTPARTITION_NUMBER
+
+
