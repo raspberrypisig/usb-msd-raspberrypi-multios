@@ -1,32 +1,33 @@
 # usb-msd-raspberrypi-multios
 
-On my 2TB hard drive, have these partitions:
-
-FAT 32 Partions
-
-1. root=/dev/sda12
-2. root=/dev/sda13
-3.
-4.
-5.
-6.
-7.
-8.
-9.
-10.
-
-NTFS Partition
-11.
+Use GParted to partition disks (I am using GPT).
 
 
-EXT4 Partition
+First 3 partitions are "special".
+Subsequently, each OS that you want to add is a {FAT32, ext4} pair.
 
-12. Raspberry Pi OS Lite - contains OS-CHOOSER.sh (use code from OS-CHOOSER-improved)
-13. Raspberry Pi OS Desktop - Bookshelf
-14. Home Assistant - Raspberry Pi OS Desktop
-15. Twister OS
-16. Raspberry Pi OS Lite - running repairs
-17. Kali OS
+ie:
+
+PARTITION 1:
+PARTITION 2:
+PARTITION 3:
+
+To add Raspberry PI OS Desktop as first OS
+
+PARTITION 4: FAT32 boot paritition of Raspberry PI OS Desktop
+PARTITION 5: Ext3/4 partition of Raspberry PI OS Desktop
+
+# OS Changes
+
+You will need to alter each OS image you add.
+
+FAT32 changes
+
+* Create a file called NAME with the name you would like to appear in the OS selection menu
+
+EXT4 changes
+
+* change /etc/fstab to use the correct partitions for / and /boot
 
 
 # Problems
@@ -48,6 +49,8 @@ mount -o ro /dev/loop1p2 /raspbian
 cp -rv /raspbianboot/* /media/sdb1/
 rsync -avu /raspbian/ /media/sdb12/
 
+findmnt /
+findmnt /boot
 
 
 
