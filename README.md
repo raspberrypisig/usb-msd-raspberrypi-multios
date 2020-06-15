@@ -80,8 +80,8 @@ mkdir /raspbian
 mkdir /raspbianboot
 mount -o ro /dev/loop1p1 /raspbianboot
 mount -o ro /dev/loop1p2 /raspbian
-cp -rv /raspbianboot/* /media/sdb1/
-rsync -avu /raspbian/ /media/sdb12/
+cp -rv /raspbianboot/* /media/sdb4/
+rsync -avu /raspbian/ /media/sdb5/
 findmnt /
 findmnt /boot
 ```
