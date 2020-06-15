@@ -72,12 +72,9 @@ I have a 2TB external USB3 hard drive.
 1. Can't reboot to partition number 5 and above, so using partition 4 as a sacrificial partition. When selecting an OS
 from menu, I change root=/dev/sda{root_part} in cmdline.txt on /dev/sda4 and "reboot 4 "
 
-# Strategy
-Create a NAME file in the fat partition with the name of the Distro.
-If partition number < 4, then do reboot <boot_part>. Else do as stated in problem 1.
+# Useful Linux commands
 
-# Commands
-
+```sh
 losetup --show -Pf 2020-raspbian.img
 mkdir /raspbian
 mkdir /raspbianboot
@@ -85,10 +82,9 @@ mount -o ro /dev/loop1p1 /raspbianboot
 mount -o ro /dev/loop1p2 /raspbian
 cp -rv /raspbianboot/* /media/sdb1/
 rsync -avu /raspbian/ /media/sdb12/
-
 findmnt /
 findmnt /boot
-
+```
 
 
 
