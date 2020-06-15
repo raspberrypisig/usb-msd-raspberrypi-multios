@@ -62,15 +62,6 @@ EXT4 changes
 
 # How it works
 
-# My custom setup
-
-I have a 2TB external USB3 hard drive.
-
-
-# Problems
-
-1. Can't reboot to partition number 5 and above, so using partition 4 as a sacrificial partition. When selecting an OS
-from menu, I change root=/dev/sda{root_part} in cmdline.txt on /dev/sda4 and "reboot 4 "
 
 # Useful Linux commands
 
