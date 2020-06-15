@@ -30,7 +30,7 @@ The first three partitions are special partitions. Special partitions don't have
   and put in /OS-CHOOSER.sh
 * Grab script from [here](https://raw.githubusercontent.com/raspberrypisig/usb-msd-raspberrypi-multios/master/firstboot.sh) and
   put in /firstboot.sh 
-* Change cmdline.txt so that root=/dev/sda2
+* Grab cmdline.txt from [here](https://github.com/raspberrypisig/usb-msd-raspberrypi-multios/raw/master/cmdline.txt)
 * When you first boot to this partition, run
 
   ```sh
