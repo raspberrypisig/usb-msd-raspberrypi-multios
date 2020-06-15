@@ -19,7 +19,8 @@ TARGET_MOUNT_DIR="${TEMP_DIR}/targetboot"
 declare -A oslist
 options=()
 
-fat_partitions=$(parted -l $USB_BLOCK_DEVICE|grep fat|sed -n '3,$p'|awk '{print $1}')
+fat_partitions=$(sfdisk -l "$USB_BLOCK_DEVICE" | grep -i microsoft | sed -n '3,$p' | awk '{print $1}' | sed -r 's/[^0-9]*([0-9]+)/\1/')
+#fat_partitions=$(parted -l $USB_BLOCK_DEVICE|grep fat|sed -n '3,$p'|awk '{print $1}')
 
 for i in $fat_partitions
 do
