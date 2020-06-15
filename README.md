@@ -1,4 +1,4 @@
-# usb-msd-raspberrypi-multios
+# Homebrew Multiboot external USB drive boot with Raspberry Pi 4
 
 Use GParted to partition disks (Tested with GPT disk).
 
