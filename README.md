@@ -27,7 +27,7 @@ The first three partitions are special partitions. Special partitions don't have
 ### Partition 1 
 
 * Has a script called OS-CHOOSER.sh
-* Has a service run at boot called OS-CHOOSER.service
+* Has a service run at boot called OS-CHOOSER.service which causes OS-CHOOSER.sh to run instead of a getty terminal
 * To speed boot time to OS Selection Menu, run firstboot.sh from first partition.
 * Change cmdline.txt so that root=/dev/sda2
 
