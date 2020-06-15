@@ -21,7 +21,7 @@ fat_partitions=$(parted -l /dev/sda|grep fat|sed -n '3,$p'|awk '{print $1}')
 for i in $fat_partitions
 do
 mkdir -p TEMP_DIR
-mount "/dev/sda${SACRIFICIAL_BOOTPARTITION}" $TEMP_DIR
+mount "/dev/sda$i" $TEMP_DIR
 if [ -f  "${TEMP_DIR}/NAME" ];
 then
   os=$(cat "${TEMP_DIR}/NAME")
