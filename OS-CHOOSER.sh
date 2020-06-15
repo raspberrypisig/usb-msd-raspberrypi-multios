@@ -47,7 +47,8 @@ mkdir -p "${SACRIFICIAL_MOUNT_DIR}"
 mkdir -p "${TARGET_MOUNT_DIR}"
 mount "$SACRIFICIAL_BOOTPARTITION" $SACRIFICIAL_MOUNT_DIR
 mount "${USB_BLOCK_DEVICE}$TARGET_MOUNT_DIR" $TARGET_MOUNT_DIR
-sed -i -r "s/root=([^ ]*) /root=${USB_BLOCK_DEVICE}\/${linuxpart} /" "${SACRIFICIAL_MOUNT_DIR}/cmdline.txt"
+ESCAPED_USB_BLOCK_DEVICE=$(sed 's/\//\\\//g' <<< $USB_BLOCK_DEVICE)
+sed -i -r "s/root=([^ ]*) /root=${ESCAPED_USB_BLOCK_DEVICE}\/${linuxpart} /" "${SACRIFICIAL_MOUNT_DIR}/cmdline.txt"
 cp "${TARGET_MOUNT_DIR}/kernelv7l.img" "${SACRIFICIAL_MOUNT_DIR}/${bootpart}.img"
 sed -i -r "s/kernel=(.*)$/kernel=${bootpart}.img/" "${SACRIFICIAL_MOUNT_DIR}/config.txt"
 umount "${SACRIFICIAL_MOUNT_DIR}"
