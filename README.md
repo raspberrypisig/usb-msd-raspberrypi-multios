@@ -72,6 +72,8 @@ bash /firstboot.sh
 
 Then subsequent boots into the operating system will automatically open the OS selection menu.
 
+You may need to change keyboard layout using raspi-config
+
 # How it works
 
 
