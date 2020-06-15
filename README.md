@@ -27,6 +27,7 @@ The first three partitions are special partitions. Special partitions don't have
 
 * Grab firstboot.sh from [here](https://raw.githubusercontent.com/raspberrypisig/usb-msd-raspberrypi-multios/master/firstboot.sh) and put on partition 1 
 * Grab cmdline.txt from [here](https://github.com/raspberrypisig/usb-msd-raspberrypi-multios/raw/master/cmdline.txt) and replace file on partition 1
+* Extract files from [here](https://github.com/raspberrypi/rpi-eeprom/releases/download/v2020.05.28-137ad/usb-msd-boot-firmware.zip) and replace files on partition 1
 
 ### Partition 2
 
@@ -38,6 +39,7 @@ The first three partitions are special partitions. Special partitions don't have
 
 * Grab config.txt from [here](https://github.com/raspberrypisig/usb-msd-raspberrypi-multios/raw/master/cmdline.txt) and replace
 file on partition 3
+* Extract files from [here](https://github.com/raspberrypi/rpi-eeprom/releases/download/v2020.05.28-137ad/usb-msd-boot-firmware.zip) and replace files on partition 1
 
 # OS Changes
 
