@@ -15,8 +15,10 @@ SACRIFICIAL_MOUNT_DIR="${TEMP_DIR}/boot"
 
 declare -A oslist
 options=()
-str=
-for i in {2..10}
+
+fat_partitions=$(parted -l /dev/sda|grep fat|sed -n '3,$p'|awk '{print $1}')
+
+for i in $fat_partitions
 do
 mkdir -p TEMP_DIR
 mount "/dev/sda${SACRIFICIAL_BOOTPARTITION}" $TEMP_DIR
@@ -24,7 +26,6 @@ if [ -f  "${TEMP_DIR}/NAME" ];
 then
   os=$(cat "${TEMP_DIR}/NAME")
   oslist["$os"]=$i
-  str="$str $os $os"
   options+=("$os" "$os") 
 fi
 umount $TEMP_DIR
