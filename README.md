@@ -1,7 +1,6 @@
 # usb-msd-raspberrypi-multios
 
-Use GParted to partition disks (I am using GPT).
-
+Use GParted to partition disks (Tested with GPT disk).
 
 First 3 partitions are "special".
 Subsequently, each OS that you want to add is a {FAT32, ext4} pair.
@@ -18,7 +17,7 @@ To add Raspberry PI OS Desktop as first OS
 
 PARTITION 4: FAT32 boot paritition of Raspberry PI OS Desktop
 
-PARTITION 5: Ext3/4 partition of Raspberry PI OS Desktop
+PARTITION 5: Ext3/4 linux partition of Raspberry PI OS Desktop
 
 # Preparing the special partitions
 
@@ -26,25 +25,18 @@ The first three partitions are special partitions. Special partitions don't have
 
 ### Partition 1 
 
-* Grab script from [here](https://raw.githubusercontent.com/raspberrypisig/usb-msd-raspberrypi-multios/master/OS-CHOOSER.sh)
-  and put in /OS-CHOOSER.sh
-* Grab script from [here](https://raw.githubusercontent.com/raspberrypisig/usb-msd-raspberrypi-multios/master/firstboot.sh) and
-  put in /firstboot.sh 
-* Grab cmdline.txt from [here](https://github.com/raspberrypisig/usb-msd-raspberrypi-multios/raw/master/cmdline.txt)
-* When you first boot to this partition, run
-
-  ```sh
-  bash /firstboot.sh
-  ```
+* Grab OS-CHOOSER.sh from [here](https://raw.githubusercontent.com/raspberrypisig/usb-msd-raspberrypi-multios/master/OS-CHOOSER.sh) and place on partition 1
+* Grab firstboot.sh from [here](https://raw.githubusercontent.com/raspberrypisig/usb-msd-raspberrypi-multios/master/firstboot.sh) and put on partition 1 
+* Grab cmdline.txt from [here](https://github.com/raspberrypisig/usb-msd-raspberrypi-multios/raw/master/cmdline.txt) and replace file on partition 1
 
 ### Partition 2
-* Grab script from [here](https://raw.githubusercontent.com/raspberrypisig/usb-msd-raspberrypi-multios/master/oschooser.service)
-  and put in /etc/systemd/system 
-* Change /etc/fstab 
+* Grab oschooser.service from [here](https://raw.githubusercontent.com/raspberrypisig/usb-msd-raspberrypi-multios/master/oschooser.service)  and put in /etc/systemd/system 
+* Grab fstab from [here](https://github.com/raspberrypisig/usb-msd-raspberrypi-multios/raw/master/fstab) and replace file at etc/fstab
 
 ### Partition 3
 
-* Change config.txt
+* Grab config.txt from [here](https://github.com/raspberrypisig/usb-msd-raspberrypi-multios/raw/master/cmdline.txt) and replace
+file on partition 3
 
 # OS Changes
 
@@ -55,12 +47,11 @@ FAT32 changes
 * Create a file called NAME with the name you would like to appear in the OS selection menu
 
 EXT4 changes
-
-* change /etc/fstab to use the correct partitions for / and /boot
+* Change /etc/fstab to use the correct partitions for / and /boot 
 
 # First Time Boot
 
-If all is setup properly, you should boot the first-time so that:
+If all is setup properly, you should boot the first-time into Raspberry Pi OS Lite so that:
 
 ```
 $ findmnt /
@@ -70,22 +61,13 @@ $ findmnt /boot
 should see /dev/sda1
 ```
 
-If you run 
+If you run the first-time boot script,
 
 ```sh
 bash /firstboot.sh
 ```
 
-It will subsequently boot into OS selection menu.
-
-
-
-
-
-
-
-
-
+Then subsequent boots into the operating system will automatically open the OS selection menu.
 
 # How it works
 
