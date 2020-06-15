@@ -8,14 +8,36 @@ Subsequently, each OS that you want to add is a {FAT32, ext4} pair.
 
 ie:
 
-PARTITION 1:
-PARTITION 2:
-PARTITION 3:
+PARTITION 1: Boot partition of Raspberry Pi OS Lite 
+
+PARTITION 2: Ext4/linux paritition of Raspberry Pi OS Lite
+
+PARTITION 3:  Same as contents of Partition 1, ie boot partition of Raspberry Pi OS Lite 
 
 To add Raspberry PI OS Desktop as first OS
 
 PARTITION 4: FAT32 boot paritition of Raspberry PI OS Desktop
 PARTITION 5: Ext3/4 partition of Raspberry PI OS Desktop
+
+# Preparing the special partitions
+
+The first three partitions are special partitions. Special partitions don't have a file called NAME.
+
+### Partition 1 
+
+* Has a script called OS-CHOOSER.sh
+* Has a service run at boot called OS-CHOOSER.service
+* Has networking, dhcpcd, bluetooth and wifi disabled to speed boot time to OS selection menu with a script called
+  firstboot.sh which you can run the first time you setup.
+* Change cmdline.txt
+
+### Partition 2
+
+* Change /etc/fstab 
+
+### Partition 3
+
+* Change config.txt
 
 # OS Changes
 
@@ -28,6 +50,13 @@ FAT32 changes
 EXT4 changes
 
 * change /etc/fstab to use the correct partitions for / and /boot
+
+
+# How it works
+
+# My custom setup
+
+I have a 2TB external USB3 hard drive.
 
 
 # Problems
