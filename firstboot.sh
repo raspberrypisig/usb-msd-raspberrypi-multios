@@ -1,4 +1,5 @@
 #!/bin/bash
 
-systemctl disable networking
-systemctl enable OS-CHOOSER
+sudo systemctl disable networking
+sudo systemctl enable OS-CHOOSER
+sudo reboot
