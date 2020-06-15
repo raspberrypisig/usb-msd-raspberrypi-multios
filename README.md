@@ -28,9 +28,8 @@ The first three partitions are special partitions. Special partitions don't have
 
 * Has a script called OS-CHOOSER.sh
 * Has a service run at boot called OS-CHOOSER.service
-* Has networking, dhcpcd, bluetooth and wifi disabled to speed boot time to OS selection menu with a script called
-  firstboot.sh which you can run the first time you setup.
-* Change cmdline.txt
+* To speed boot time to OS Selection Menu, run firstboot.sh from first partition.
+* Change cmdline.txt so that root=/dev/sda2
 
 ### Partition 2
 
