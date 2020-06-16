@@ -1,10 +1,28 @@
 #!/bin/bash
+sudo chmod +x /OS-CHOOSER.sh
 
-sudo systemctl disable networking
-sudo systemctl enable OS-CHOOSER
-sudo systemctl disable dhcpcd
-sudo systemctl disable rpi-eeprom-update
-sudo systemctl disable avahi-daemon
-sudo systemctl mask raspi-config
-sudo systemclt disable dphys-swapfile
+services_disable=( "networking" "OS-CHOOSER" "dhcpcd" "rpi-eeprom-update" "avahi-daemon" "dphys-swapfile" "wpa_supplicant" "rc-local" )
+services_enable=( "OS-CHOOSER" )
+services_mask=( "raspi-config" )
+
+for service in "${services_disable[@]}"
+do
+  sudo systemctl disable $service
+done
+
+for service in "${services_enable[@]}"
+do
+  sudo systemctl enable $service
+done
+
+for service in "${services_mask[@]}"
+do
+  sudo systemctl mask $service
+done
+
+
+
+
+
+
 sudo reboot
