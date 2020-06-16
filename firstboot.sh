@@ -1,7 +1,7 @@
 #!/bin/bash
 sudo chmod +x /OS-CHOOSER.sh
 
-services_disable=( "networking" "OS-CHOOSER" "dhcpcd" "rpi-eeprom-update" "avahi-daemon" "dphys-swapfile" "wpa_supplicant" "rc-local" )
+services_disable=( "networking" "dhcpcd" "rpi-eeprom-update" "avahi-daemon" "dphys-swapfile" "wpa_supplicant" "rc-local" )
 services_enable=( "OS-CHOOSER" )
 services_mask=( "raspi-config" )
 
