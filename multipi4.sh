@@ -64,9 +64,9 @@ case "$1" in
     shift
     setup "$@"
    ;;
-  "addon")
+  "addos")
     shift
-    addon "$@"
+    addos "$@"
    ;;
   *)
     echo help
