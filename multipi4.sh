@@ -36,6 +36,8 @@ addos() {
   linuxpart="$3"
   name="$4"
 
+
+
   loopdevice=$(losetup --show -Pf "$osimg")
   mkdir -p osboot
   mkdir -p os
@@ -46,17 +48,17 @@ addos() {
   mount $bootpart usbboot
   mount $linuxpart usblinux
 
-  cp -r osboot/* usbboot/
+  cp -r ./osboot/* usbboot/
   rsync -a os/ usblinux/
   wget -O usblinux/etc/fstab https://github.com/raspberrypisig/usb-msd-raspberrypi-multios/blob/master/fstab
   sed -i -r "s/\/dev\/sda1/$bootpart/" usblinux/etc/fstab
   sed -i -r "s/\/dev\/sda2/$linuxpart/" usblinux/etc/fstab
   echo "$name" > usbboot/NAME
 
-
   umount {usbboot,usblinux,osboot,os}
   losetup -D $loopdevice
 }
+
 
 
 case "$1" in
