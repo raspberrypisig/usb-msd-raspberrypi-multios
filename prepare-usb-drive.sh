@@ -13,6 +13,7 @@ setup() {
   mount -o ro ${loopdevice}p2 raspbian
   cp -r raspbianboot/* usb1/ 
   rsync -au raspbian/ usb3/
+  wget -O usb3/etc/fstab https://github.com/raspberrypisig/usb-msd-raspberrypi-multios/raw/master/fstab
   wget https://github.com/raspberrypi/rpi-eeprom/releases/download/v2020.05.28-137ad/usb-msd-boot-firmware.zip
   unzip -d usb1 usb-msd-boot-firmware.zip
   wget -O usb1/config.txt https://github.com/raspberrypisig/usb-msd-raspberrypi-multios/raw/master/partition1/config.txt
