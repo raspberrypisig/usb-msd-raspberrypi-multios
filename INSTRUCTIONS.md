@@ -7,5 +7,6 @@
 
 ### Steps
 
-1. 
+1. Create an empty directory where the fun happens and cd into the directory.
+2. 
 
