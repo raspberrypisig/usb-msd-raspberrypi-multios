@@ -14,6 +14,7 @@ setup() {
   mount ${usbdevice}1 usb1
   mount ${usbdevice}2 usb2
   mount ${usbdevice}3 usb3
+  
   cp -r raspbianboot/* usb1/ 
   rsync -au raspbian/ usb3/
   wget -O usb3/etc/fstab https://github.com/raspberrypisig/usb-msd-raspberrypi-multios/raw/master/fstab
