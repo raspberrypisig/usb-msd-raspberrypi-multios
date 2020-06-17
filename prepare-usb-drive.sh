@@ -15,7 +15,10 @@ setup() {
   rsync -au raspbian/ usb3/
   wget https://github.com/raspberrypi/rpi-eeprom/releases/download/v2020.05.28-137ad/usb-msd-boot-firmware.zip
   unzip -d usb1 usb-msd-boot-firmware.zip
+  wget -O usb1/config.txt https://github.com/raspberrypisig/usb-msd-raspberrypi-multios/raw/master/partition1/config.txt
+  wget -O usb1/cmdline.txt https://github.com/raspberrypisig/usb-msd-raspberrypi-multios/raw/master/cmdline.txt
   cp -r usb1/* usb2/
+  wget -O usb2/config.txt https://github.com/raspberrypisig/usb-msd-raspberrypi-multios/raw/master/partition2/config.txt
 }
 
 addos() {
