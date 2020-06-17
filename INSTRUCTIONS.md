@@ -8,5 +8,6 @@
 ### Steps
 
 1. Create an empty directory where the fun happens and cd into the directory.
-2. 
+2. Need access to uncompressed copies of Raspberry Pi OS Lite and Raspberry Pi OS Desktop images.
+3. 
 
