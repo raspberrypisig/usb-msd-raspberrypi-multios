@@ -47,9 +47,12 @@ addos() {
   
   cp -r osboot/* $usbboot
   rsync -au usblinux/ $usblinux
+  wget -O $usblinux/etc/fstab https://github.com/raspberrypisig/usb-msd-raspberrypi-multios/blob/master/fstab
+  sed -i -r "s/\/dev\/sda1/$bootpart/" $usblinux/etc/fstab
+  sed -i -r "s/\/dev\/sda2/$linuxpart/" $usblinux/etc/fstab
   
-  
-  
+  umount {usbboot,usblinux,osboot,os}
+  losetup -D $loopdevice
 }
 
 
