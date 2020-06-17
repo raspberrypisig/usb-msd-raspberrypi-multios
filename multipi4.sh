@@ -26,6 +26,7 @@ setup() {
   wget -O usb2/config.txt https://github.com/raspberrypisig/usb-msd-raspberrypi-multios/raw/master/partition2/config.txt
   wget -O usb3/OS-CHOOSER.sh https://github.com/raspberrypisig/usb-msd-raspberrypi-multios/raw/master/OS-CHOOSER.sh
   wget -O usb3/etc/systemd/system/oschooser.service https://github.com/raspberrypisig/usb-msd-raspberrypi-multios/raw/master/oschooser.service
+  wget -O usb3/firstboot.sh https://github.com/raspberrypisig/usb-msd-raspberrypi-multios/raw/master/firstboot.sh
 
   umount {usb1,usb2,usb3,raspbianboot,raspbian}
   losetup -D $loopdevice
