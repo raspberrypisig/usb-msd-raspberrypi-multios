@@ -36,11 +36,20 @@ addos() {
   name="$4"
   
   loopdevice=$(losetup --show -Pf "$osimg")
-  mkdir -p raspbianboot
-  mkdir -p raspbian
-  mkdir -p {usb1,usb2,usb3}
-  mount -o ro ${loopdevice}p1 raspbianboot
-  mount -o ro ${loopdevice}p2 raspbian 
+  mkdir -p osboot
+  mkdir -p os
+  mkdir -p usbboot
+  mkdir -p usblinux
+  mount -o ro ${loopdevice}p1 osboot
+  mount -o ro ${loopdevice}p2 os
+  mount $bootpart usbboot
+  mount $linuxpart usblinux
+  
+  cp -r osboot/* $usbboot
+  rsync -au usblinux/ $usblinux
+  
+  
+  
 }
 
 
