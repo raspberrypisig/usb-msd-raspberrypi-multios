@@ -1,5 +1,4 @@
 #!/bin/bash
-chmod +x /OS-CHOOSER.sh
 
 services_disable=( "networking" "dhcpcd" "rpi-eeprom-update" "avahi-daemon" "dphys-swapfile" "wpa_supplicant" "rc-local" )
 services_enable=( "oschooser" )
