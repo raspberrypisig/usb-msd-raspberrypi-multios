@@ -20,6 +20,7 @@ TRIPLE-CHECK. YOU HAVE BEEN WARNED.
 3. Setup of first three partitions(partition 1 FAT32, partition 2 FAT32, partition 3 ext4) 
 
 ```sh
+fdisk -l
 wget https://github.com/raspberrypisig/usb-msd-raspberrypi-multios/raw/master/multipi4.sh
 chmod +x multipi4.sh
 ./multipi4.sh setup /dev/sdc /media/demo/sdb1-ata-Samsung_Portable/2020-05-27-raspios-buster-lite-armhf.img
