@@ -60,7 +60,7 @@ addos() {
   escaped_bootpart=$(sed 's/\//\\\//g' <<< $bootpart)
   escaped_linuxpart=$(sed 's/\//\\\//g' <<< $linuxpart)
   sed -i -r "s/\/dev\/sda1/$escaped_bootpart/" usblinux/etc/fstab
-  sed -i -r "s/\/dev\/sda2/$escaped_linuxpart/" usblinux/etc/fstab
+  sed -i -r "s/\/dev\/sda3/$escaped_linuxpart/" usblinux/etc/fstab
   echo "$name" > usbboot/NAME
 
   umount {usbboot,usblinux,osboot,os}
