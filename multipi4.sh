@@ -57,7 +57,7 @@ addos() {
 
   cp -r ./osboot/* usbboot/
   rsync -a os/ usblinux/
-  wget -O usblinux/etc/fstab https://github.com/raspberrypisig/usb-msd-raspberrypi-multios/blob/master/fstab
+  wget -O usblinux/etc/fstab https://github.com/raspberrypisig/usb-msd-raspberrypi-multios/raw/master/fstab
   escaped_bootpart=$(sed 's/\//\\\//g' <<< $bootpart)
   escaped_linuxpart=$(sed 's/\//\\\//g' <<< $linuxpart)
   sed -i -r "s/\/dev\/sda1/$escaped_bootpart/" usblinux/etc/fstab
