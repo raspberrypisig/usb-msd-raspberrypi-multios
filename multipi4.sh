@@ -29,7 +29,8 @@ setup() {
   wget -O usb3/etc/systemd/system/oschooser.service https://github.com/raspberrypisig/usb-msd-raspberrypi-multios/raw/master/oschooser.service
   wget -O usb3/firstboot.sh https://github.com/raspberrypisig/usb-msd-raspberrypi-multios/raw/master/firstboot.sh
   chmod +x usb3/firstboot.sh
-  wget -O usb3/etc/systemd/system/firstboot.service https://github.com/raspberrypisig/usb-msd-raspberrypi-multios/raw/master/firstboot.service
+  cp usb3/etc/rc.local usb3/etc/rc.local.original
+  echo -e "/firstboot.sh\nexit0" > usb3/etc/rc.local
 
   umount {usb1,usb2,usb3,raspbianboot,raspbian}
   losetup -D $loopdevice
