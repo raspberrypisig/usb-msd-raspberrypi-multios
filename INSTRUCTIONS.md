@@ -28,6 +28,7 @@ chmod +x multipi4.sh
 4. Add an OS (in this case Raspberry Pi OS Desktop on partition 4(FAT32) and partition 5(ext4)
 
 ```sh
+fdisk -l
 ./multipi4.sh addos /media/demo/sdb1-ata-Samsung_Portable/2020-05-27-raspios-buster-armhf.img /dev/sdc4 /dev/sdc5 "Raspberry Pi OS Desktop"
 ```
 
