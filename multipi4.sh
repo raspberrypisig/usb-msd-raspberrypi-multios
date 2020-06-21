@@ -37,7 +37,7 @@ setup() {
 }
 
 
-addos() {
+fromimg() {
   osimg="$1"
   bootpart="$2"
   linuxpart="$3"
@@ -70,6 +70,35 @@ addos() {
   losetup -D $loopdevice
 }
 
+fromsd() {
+  sd="$1"
+  bootpart="$2"
+  linuxpart="$3"
+  name="$4"
+
+  mkdir -p osboot
+  mkdir -p os
+  mkdir -p usbboot
+  mkdir -p usblinux
+  mount -o ro ${sd}p1 osboot
+  mount -o ro ${sd}p2 os
+  mount $bootpart usbboot
+  mount $linuxpart usblinux
+
+  cp -r ./osboot/* usbboot/
+  rsync -a os/ usblinux/
+  wget -O usblinux/etc/fstab https://github.com/raspberrypisig/usb-msd-raspberrypi-multios/raw/master/fstab
+  #escaped_bootpart=$(sed 's/\//\\\//g' <<< $bootpart)
+  #escaped_linuxpart=$(sed 's/\//\\\//g' <<< $linuxpart)
+  bootpartnumber="${bootpart//[^0-9]}"
+  linuxpartnumber="${linuxpart//[^0-9]}"
+  sed -i -r "s/\/dev\/sda1/\/dev\/sda$bootpartnumber/" usblinux/etc/fstab
+  sed -i -r "s/\/dev\/sda3/\/dev\/sda$linuxpartnumber/" usblinux/etc/fstab
+  echo "$name" > usbboot/NAME
+
+  umount {usbboot,usblinux,osboot,os}
+}
+
 
 
 case "$1" in
@@ -77,9 +106,16 @@ case "$1" in
     shift
     setup "$@"
    ;;
-  "addos")
+  "add")
     shift
-    addos "$@"
+    case "$1" in
+      "fromimg")
+        fromimg "$@"
+        ;;
+      "fromsd")
+        fromsd "$@"
+        ;;
+    esac
    ;;
   *)
     echo help
