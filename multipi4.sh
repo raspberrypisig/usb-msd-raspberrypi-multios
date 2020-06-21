@@ -110,9 +110,11 @@ case "$1" in
     shift
     case "$1" in
       "fromimg")
+        shift
         fromimg "$@"
         ;;
       "fromsd")
+        shift
         fromsd "$@"
         ;;
     esac
