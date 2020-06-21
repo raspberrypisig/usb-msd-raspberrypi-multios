@@ -3,3 +3,5 @@
 ![GPT Gparted](https://github.com/raspberrypisig/usb-msd-raspberrypi-multios/raw/master/gpt.jpg)
 
 ![Multiboot OS partitions](https://github.com/raspberrypisig/usb-msd-raspberrypi-multios/raw/master/gparted.jpg)
+
+![OS Boot Selection](https://github.com/raspberrypisig/usb-msd-raspberrypi-multios/raw/master/init-problem.jpg)
