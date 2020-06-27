@@ -50,7 +50,6 @@ mkdir -p "$SACRIFICIAL_MOUNT_DIR"
 mkdir -p "$TARGET_MOUNT_DIR"
 mount -o rw "$SACRIFICIAL_BOOTPARTITION" $SACRIFICIAL_MOUNT_DIR
 mount -o rw "${USB_BLOCK_DEVICE}${bootpart}" $TARGET_MOUNT_DIR
-mount|grep sda2
 ESCAPED_USB_BLOCK_DEVICE=$(sed 's/\//\\\//g' <<< $USB_BLOCK_DEVICE)
 sed -i -r "s/root=([^ ]*) /root=${ESCAPED_USB_BLOCK_DEVICE}${linuxpart} /" "${SACRIFICIAL_MOUNT_DIR}/cmdline.txt"
 cp "${TARGET_MOUNT_DIR}/${CONFIG_NAME}" "$SACRIFICIAL_MOUNT_DIR"
