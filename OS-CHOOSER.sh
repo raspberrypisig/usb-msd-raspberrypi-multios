@@ -12,10 +12,12 @@
 USB_BLOCK_DEVICE=/dev/sda
 SACRIFICIAL_BOOTPARTITION_NUMBER=2
 SACRIFICIAL_BOOTPARTITION="${USB_BLOCK_DEVICE}${SACRIFICIAL_BOOTPARTITION_NUMBER}"
-TEMP_DIR=/tmp
+TEMP_DIR=/mnt
 SACRIFICIAL_MOUNT_DIR="${TEMP_DIR}/boot"
 TARGET_MOUNT_DIR="${TEMP_DIR}/targetboot"
 KERNEL_NAME="kernel7l.img"
+KERNEL64_NAME="kernel8.img"
+CONFIG_NAME="config.txt"
 
 declare -A oslist
 options=()
@@ -42,18 +44,35 @@ CHOICE=$(whiptail --title "Choose OS" --menu " "  --nocancel --noitem   20 70 5 
 #echo ${oslist[$CHOICE]}
 bootpart="${oslist[$CHOICE]}"
 echo $bootpart
-
+set -x
 linuxpart=$(( bootpart + 1  ))
 mkdir -p "$SACRIFICIAL_MOUNT_DIR"
 mkdir -p "$TARGET_MOUNT_DIR"
-mount "$SACRIFICIAL_BOOTPARTITION" $SACRIFICIAL_MOUNT_DIR
-mount "${USB_BLOCK_DEVICE}${bootpart}" $TARGET_MOUNT_DIR
+mount -o rw "$SACRIFICIAL_BOOTPARTITION" $SACRIFICIAL_MOUNT_DIR
+mount -o rw "${USB_BLOCK_DEVICE}${bootpart}" $TARGET_MOUNT_DIR
+mount|grep sda2
 ESCAPED_USB_BLOCK_DEVICE=$(sed 's/\//\\\//g' <<< $USB_BLOCK_DEVICE)
 sed -i -r "s/root=([^ ]*) /root=${ESCAPED_USB_BLOCK_DEVICE}${linuxpart} /" "${SACRIFICIAL_MOUNT_DIR}/cmdline.txt"
-cp "${TARGET_MOUNT_DIR}/${KERNEL_NAME}" "$SACRIFICIAL_MOUNT_DIR"
+cp "${TARGET_MOUNT_DIR}/${CONFIG_NAME}" "$SACRIFICIAL_MOUNT_DIR"
+mkdir -p "$SACRIFICIAL_MOUNT_DIR/$bootpart"
+chmod +w "${SACRIFICIAL_MOUNT_DIR}/${CONFIG_NAME}"
+echo -e 'dtparam=sd_poll_once=on\n' >> "${SACRIFICIAL_MOUNT_DIR}/${CONFIG_NAME}"
+echo -e "os_prefix=${bootpart}/\n" >> "${SACRIFICIAL_MOUNT_DIR}/${CONFIG_NAME}"
+cp  $TARGET_MOUNT_DIR/*.dtb "$SACRIFICIAL_MOUNT_DIR/$bootpart"
+cp  $TARGET_MOUNT_DIR/kernel*.img "$SACRIFICIAL_MOUNT_DIR/$bootpart"
+cp -r $TARGET_MOUNT_DIR/overlays "$SACRIFICIAL_MOUNT_DIR/$bootpart"
+sync
+#grep arm_64bit=1 "$TARGET_MOUNT_DIR/config.txt" >/dev/null
+
+#if [ $? -eq 0  ];
+#then
+#  cp "${TARGET_MOUNT_DIR}/${KERNEL64_NAME}" "$SACRIFICIAL_MOUNT_DIR"
+#  echo -e 'kernel=kernel8.img\n' >> "$SACRIFICIAL_MOUNT_DIR/$CONFIG_NAME"
+#else
+#  cp "${TARGET_MOUNT_DIR}/${KERNEL_NAME}" "$SACRIFICIAL_MOUNT_DIR"
+#  echo -e 'kernel=kernel7l.img\n' >> "$SACRIFICIAL_MOUNT_DIR/$CONFIG_NAME"
+#fi
 #sed -i -r "s/kernel=(.*)$/kernel=${bootpart}.img/" "${SACRIFICIAL_MOUNT_DIR}/config.txt"
 umount "$SACRIFICIAL_MOUNT_DIR"
 umount "$TARGET_MOUNT_DIR"
 sudo reboot $SACRIFICIAL_BOOTPARTITION_NUMBER
-
-
