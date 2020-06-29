@@ -6,7 +6,7 @@ Boot into raspbian and then chroot to add user ubuntu. Something like
 fdisk -l
 mkdir /mnt/hd
 #assume that ext4 partition is on /dev/sda18
-mount /dev/sda18 /mnthd
+mount /dev/sda18 /mnt/hd
 chroot /mnt/hd
 adduser ubuntu
 adduser -aG sudo ubuntu
