@@ -1,0 +1,10 @@
+create user ubuntu
+
+Boot into raspbian and then chroot to add user ubuntu. Something like
+
+
+fdisk -l
+mkdir /mnt/hd
+chroot /dev/sda18 /mnt/hd
+adduser ubuntu
+adduser -aG sudo ubuntu
