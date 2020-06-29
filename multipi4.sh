@@ -99,6 +99,41 @@ fromsd() {
   umount {usbboot,usblinux,osboot,os}
 }
 
+ubuntufromimg() {
+  osimg="$1"
+  bootpart="$2"
+  linuxpart="$3"
+  name="$4"
+
+  loopdevice=$(losetup --show -Pf "$osimg")
+  mkdir -p osboot
+  mkdir -p os
+  mkdir -p usbboot
+  mkdir -p usblinux
+  mount -o ro ${loopdevice}p1 osboot
+  mount -o ro ${loopdevice}p2 os
+  mount $bootpart usbboot
+  mount $linuxpart usblinux
+
+  cp -r ./osboot/* usbboot/
+  rsync -a os/ usblinux/
+  touch usblinux/etc/cloud/cloud-init.disabled
+cat <<EOF > usbboot/config.txt
+[all]
+device_tree_address=0x03000000
+kernel=vmlinuz
+initramfs initrd.img followkernel
+EOF
+
+  bootpartnumber="${bootpart//[^0-9]}"
+  linuxpartnumber="${linuxpart//[^0-9]}"
+  sed -i -r "s/LABEL=system-boot/\/dev\/sda$bootpartnumber/" usblinux/etc/fstab
+  sed -i -r "s/LABEL=writable/\/dev\/sda$linuxpartnumber/" usblinux/etc/fstab
+  echo "$name" > usbboot/NAME
+  umount {usbboot,usblinux,osboot,os}
+  losetup -D $loopdevice                                                
+}
+
 
 
 case "$1" in
@@ -119,6 +154,10 @@ case "$1" in
         ;;
     esac
    ;;
+  "addubuntu")
+    shift
+    ubuntufromimg "$@"
+  ;;
   *)
     echo help
     ;;
