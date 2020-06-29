@@ -58,6 +58,18 @@ chmod +w "${SACRIFICIAL_MOUNT_DIR}/${CONFIG_NAME}"
 echo -e 'dtparam=sd_poll_once=on\n' >> "${SACRIFICIAL_MOUNT_DIR}/${CONFIG_NAME}"
 echo -e "os_prefix=${bootpart}/\n" >> "${SACRIFICIAL_MOUNT_DIR}/${CONFIG_NAME}"
 cp  $TARGET_MOUNT_DIR/*.dtb "$SACRIFICIAL_MOUNT_DIR/$bootpart"
+
+if [ -f "$TARGET_MOUNT_DIR/initrd.img"  ];
+then
+  cp "$TARGET_MOUNT_DIR/initrd.img" "$SACRIFICIAL_MOUNT_DIR/$bootpart"
+fi
+
+if [ -f "$TARGET_MOUNT_DIR/vmlinuz"  ];
+then
+  cp "$TARGET_MOUNT_DIR/vmlinuz" "$SACRIFICIAL_MOUNT_DIR/$bootpart"
+fi
+
+
 cp  $TARGET_MOUNT_DIR/kernel*.img "$SACRIFICIAL_MOUNT_DIR/$bootpart"
 cp -r $TARGET_MOUNT_DIR/overlays "$SACRIFICIAL_MOUNT_DIR/$bootpart"
 sync
