@@ -58,7 +58,6 @@ chmod +w "${SACRIFICIAL_MOUNT_DIR}/${CONFIG_NAME}"
 echo -e 'dtparam=sd_poll_once=on\n' >> "${SACRIFICIAL_MOUNT_DIR}/${CONFIG_NAME}"
 echo -e "os_prefix=${bootpart}/\n" >> "${SACRIFICIAL_MOUNT_DIR}/${CONFIG_NAME}"
 cp  $TARGET_MOUNT_DIR/*.dtb "$SACRIFICIAL_MOUNT_DIR/$bootpart"
-
 if [ -f "$TARGET_MOUNT_DIR/initrd.img"  ];
 then
   cp "$TARGET_MOUNT_DIR/initrd.img" "$SACRIFICIAL_MOUNT_DIR/$bootpart"
@@ -66,8 +65,15 @@ fi
 
 if [ -f "$TARGET_MOUNT_DIR/vmlinuz"  ];
 then
+  gzip -t "$TARGET_MOUNT_DIR/vmlinuz" 2>/dev/null
+  if [ $? -eq 0 ];
+  then
+    cp "$TARGET_MOUNT_DIR/vmlinuz" "$SACRIFICIAL_MOUNT_DIR/$bootpart"
+    zcat "$TARGET_MOUNT_DIR/vmlinuz" > "$TARGET_MOUNT_DIR/vmlinux"
+  fi
   cp "$TARGET_MOUNT_DIR/vmlinuz" "$SACRIFICIAL_MOUNT_DIR/$bootpart"
 fi
+
 
 
 cp  $TARGET_MOUNT_DIR/kernel*.img "$SACRIFICIAL_MOUNT_DIR/$bootpart"
