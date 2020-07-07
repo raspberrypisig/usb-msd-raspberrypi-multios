@@ -104,6 +104,7 @@ ubuntufromimg() {
   bootpart="$2"
   linuxpart="$3"
   name="$4"
+  arm64bit=${5:-0}
 
   loopdevice=$(losetup --show -Pf "$osimg")
   mkdir -p osboot
@@ -123,6 +124,7 @@ cat <<EOF > usbboot/config.txt
 device_tree_address=0x03000000
 kernel=vmlinuz
 initramfs initrd.img followkernel
+arm_64bit=$arm64bit
 EOF
 
   bootpartnumber="${bootpart//[^0-9]}"
@@ -157,6 +159,10 @@ case "$1" in
   "addubuntu")
     shift
     ubuntufromimg "$@"
+  ;;
+  "addubuntu64")
+    shift
+    ubuntufromimg "$@" 1
   ;;
   *)
     echo help
