@@ -29,6 +29,8 @@ chmod +x /usr/local/bin/multipi4
 
 ```sh
 fdisk -l
+cd /mnt
+ls
 multipi4 setup /dev/sdc /media/demo/sdb1-ata-Samsung_Portable/2020-05-27-raspios-buster-lite-armhf.img
 ```
 5. 
@@ -41,6 +43,8 @@ Add Raspberry Pi OS from a disk image (in this case Raspberry Pi OS Desktop on p
 
 ```sh
 fdisk -l
+cd /mnt
+ls
 multipi4 add fromimg /media/demo/sdb1-ata-Samsung_Portable/2020-05-27-raspios-buster-armhf.img /dev/sdc4 /dev/sdc5 "Raspberry Pi OS Desktop"
 ```
 
@@ -50,6 +54,8 @@ Add Raspberry Pi OS from a OS on an existing SD card
 
 ```sh
 fdisk -l
+cd /mnt
+ls
 multipi4 add fromsd /dev/mmcblk0 /dev/sdc4 /dev/sdc5 "Raspberry Pi OS Desktop"
 ```
 
@@ -58,6 +64,8 @@ multipi4 add fromsd /dev/mmcblk0 /dev/sdc4 /dev/sdc5 "Raspberry Pi OS Desktop"
 Add Ubuntu 20.04 from a disk image
 
 ```sh
+cd /mnt
+ls
 multipi4 addubuntu /media/demo/sdb1-ata-Samsung_Portable/2020-05-27-raspios-buster-armhf.img /dev/sdc4 /dev/sdc5 "Ubuntu 20.04"
 ```
 
