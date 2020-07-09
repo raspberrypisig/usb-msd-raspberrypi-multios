@@ -17,34 +17,39 @@ TRIPLE-CHECK. YOU HAVE BEEN WARNED.
 
 1. Create an empty directory where the fun happens and cd into the directory.
 2. Need access to uncompressed copies of Raspberry Pi OS Lite and Raspberry Pi OS Desktop images.
-3. Setup of first three partitions(partition 1 FAT32, partition 2 FAT32, partition 3 ext4) 
+3. Install multip4 
+
+```sh
+wget -O /usr/local/bin/multipi4 https://github.com/raspberrypisig/usb-msd-raspberrypi-multios/raw/master/multipi4
+chmod +x /usr/local/bin/multipi4
+```
+
+4. Setup of first three partitions(partition 1 FAT32, partition 2 FAT32, partition 3 ext4) 
 
 ```sh
 fdisk -l
-wget https://github.com/raspberrypisig/usb-msd-raspberrypi-multios/raw/master/multipi4.sh
-chmod +x multipi4.sh
-./multipi4.sh setup /dev/sdc /media/demo/sdb1-ata-Samsung_Portable/2020-05-27-raspios-buster-lite-armhf.img
+multipi4 setup /dev/sdc /media/demo/sdb1-ata-Samsung_Portable/2020-05-27-raspios-buster-lite-armhf.img
 ```
-4. 
+5. 
 
 In the following, want to install on partition 4 (FAT32) and partition 5 (ext4)
 
 (i) OPTION 1
 
-Add an OS from a disk image (in this case Raspberry Pi OS Desktop on partition 4(FAT32) and partition 5(ext4)
+Add Raspberry Pi OS from a disk image (in this case Raspberry Pi OS Desktop on partition 4(FAT32) and partition 5(ext4)
 
 ```sh
 fdisk -l
-./multipi4.sh add fromimg /media/demo/sdb1-ata-Samsung_Portable/2020-05-27-raspios-buster-armhf.img /dev/sdc4 /dev/sdc5 "Raspberry Pi OS Desktop"
+multipi4 add fromimg /media/demo/sdb1-ata-Samsung_Portable/2020-05-27-raspios-buster-armhf.img /dev/sdc4 /dev/sdc5 "Raspberry Pi OS Desktop"
 ```
 
 (ii) OPTION 2
 
-Add an OS from a OS on an existing SD card 
+Add Raspberry Pi OS from a OS on an existing SD card 
 
 ```sh
 fdisk -l
-./multipi4.sh add fromsd /dev/mmcblk0 /dev/sdc4 /dev/sdc5 "Raspberry Pi OS Desktop"
+multipi4 add fromsd /dev/mmcblk0 /dev/sdc4 /dev/sdc5 "Raspberry Pi OS Desktop"
 ```
 
 (iii) OPTION 3
@@ -52,7 +57,7 @@ fdisk -l
 Add Ubuntu 20.04 from a disk image
 
 ```sh
-./multipi4.sh addubuntu /media/demo/sdb1-ata-Samsung_Portable/2020-05-27-raspios-buster-armhf.img /dev/sdc4 /dev/sdc5 "Ubuntu 20.04"
+multipi4 addubuntu /media/demo/sdb1-ata-Samsung_Portable/2020-05-27-raspios-buster-armhf.img /dev/sdc4 /dev/sdc5 "Ubuntu 20.04"
 ```
 
 
