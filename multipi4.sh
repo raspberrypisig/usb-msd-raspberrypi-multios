@@ -106,6 +106,13 @@ ubuntufromimg() {
   name="$4"
   arm64bit=${5:-0}
 
+  if [ $arm64bit -eq 1 ];
+  then
+    kernel=vmlinux
+  else
+    kernel=vmlinuz
+  fi
+
   loopdevice=$(losetup --show -Pf "$osimg")
   mkdir -p osboot
   mkdir -p os
@@ -122,7 +129,7 @@ ubuntufromimg() {
 cat <<EOF > usbboot/config.txt
 [all]
 device_tree_address=0x03000000
-kernel=vmlinuz
+kernel=$kernel
 initramfs initrd.img followkernel
 arm_64bit=$arm64bit
 EOF
