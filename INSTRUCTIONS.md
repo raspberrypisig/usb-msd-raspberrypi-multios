@@ -55,10 +55,18 @@ multipi4 add fromsd /dev/mmcblk0 /dev/sdc4 /dev/sdc5 "Raspberry Pi OS Desktop"
 
 (iii) OPTION 3
 
-Add Ubuntu 20.04 from a disk image
+Add Ubuntu 20.04 32-bit from a disk image
 
 ```sh
-multipi4 addubuntu /media/demo/sdb1-ata-Samsung_Portable/2020-05-27-raspios-buster-armhf.img /dev/sdc4 /dev/sdc5 "Ubuntu 20.04"
+multipi4 addubuntu /media/demo/sdb1-ata-Samsung_Portable/ubuntu-20.04-preinstalled-server-armhf+raspi.img /dev/sdc4 /dev/sdc5 "Ubuntu 20.04"
+```
+
+(iii) OPTION 4
+
+Add Ubuntu 20.04 64-bit from a disk image
+
+```sh
+multipi4 addubuntu64 /media/demo/sdb1-ata-Samsung_Portable/ubuntu-20.04-preinstalled-server-arm64+raspi.img /dev/sdc4 /dev/sdc5 "Ubuntu 20.04"
 ```
 
 
