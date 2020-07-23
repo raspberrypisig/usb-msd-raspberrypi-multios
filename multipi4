@@ -140,7 +140,8 @@ EOF
   sed -i -r "s/LABEL=writable/\/dev\/sda$linuxpartnumber/" usblinux/etc/fstab
   echo "$name" > usbboot/NAME
   umount {usbboot,usblinux,osboot,os}
-  losetup -D $loopdevice                                                
+  losetup -D $loopdevice
+  rm -rf {usbboot,usblinux,os,osboot}
 }
 
 
