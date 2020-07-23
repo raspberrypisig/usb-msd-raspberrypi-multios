@@ -68,6 +68,7 @@ fromimg() {
 
   umount {usbboot,usblinux,osboot,os}
   losetup -D $loopdevice
+  rm -rf {usbboot,usblinux,os,osboot}
 }
 
 fromsd() {
@@ -97,6 +98,7 @@ fromsd() {
   echo "$name" > usbboot/NAME
 
   umount {usbboot,usblinux,osboot,os}
+  rm -rf {usbboot,usblinux,os,osboot}
 }
 
 ubuntufromimg() {
