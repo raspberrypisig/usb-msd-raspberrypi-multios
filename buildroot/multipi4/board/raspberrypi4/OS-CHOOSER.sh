@@ -92,4 +92,4 @@ sync
 #sed -i -r "s/kernel=(.*)$/kernel=${bootpart}.img/" "${SACRIFICIAL_MOUNT_DIR}/config.txt"
 umount "$SACRIFICIAL_MOUNT_DIR"
 umount "$TARGET_MOUNT_DIR"
-sudo reboot $SACRIFICIAL_BOOTPARTITION_NUMBER
+reboot $SACRIFICIAL_BOOTPARTITION_NUMBER
