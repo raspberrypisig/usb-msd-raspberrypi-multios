@@ -9,3 +9,9 @@ label: gpt
 ,,0FC63DAF-8483-4772-8E79-3D69D8477DE4
 EOF
 
+mkfs.vfat "${usb_disk}/p1"
+mkfs.vfat "${usb_disk}/p2"
+mkfs.btrfs "${usb_disk}/p3"
+
+
+
