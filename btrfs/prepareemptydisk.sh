@@ -23,7 +23,7 @@ mount ${loop}p2 p2
 mount ${usb_disk}p1 usb1
 mount ${usb_disk}p3 usb3
 cd usb3
-btrfs subvolume create 1
+btrfs subvolume create boot
 cd ..
 cp -rv p1/* usb1
 rsync -avu p2/ usb3/1
