@@ -1,4 +1,4 @@
-apt install -y binfmt-support qemu-user-static systemd-container
+apt install -y qemu binfmt-support qemu-user-static systemd-container
 
 script="$1"
 mount_dir="$2"
