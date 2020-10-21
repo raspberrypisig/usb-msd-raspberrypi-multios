@@ -4,7 +4,6 @@ disk="$2"
 bootfiles=distros/boot/files/fat32
 linuxfiles=distros/boot/files/btrfs
 
-
 mkdir -p {usb1,usb3}
 
 mount ${disk}p1 usb1
