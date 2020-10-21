@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-disk="$2"
+disk="$1"
 bootfiles=distros/boot/files/fat32
 linuxfiles=distros/boot/files/btrfs
 
