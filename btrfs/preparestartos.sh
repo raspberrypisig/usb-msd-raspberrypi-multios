@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -x
 
 disk="$1"
 bootfiles=usb-msd-raspberrypi-multios/btrfs/distros/boot/files/fat32
@@ -12,8 +13,8 @@ mkdir -p usb3
 mount ${disk}p3 usb3
 mount ${disk}p1 usb3/boot
 
-cp -rv $bootfiles/* usb3/boot
-rsync -av $linuxfiles/ usb3
+cp -r $bootfiles/* usb3/boot
+rsync -a $linuxfiles/ usb3
 
 chmod +x setup.sh
 cp setup.sh usb3
