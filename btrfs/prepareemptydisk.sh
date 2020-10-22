@@ -26,7 +26,7 @@ mount ${usb_disk}p3 usb3
 cd usb3
 btrfs subvolume create boot
 cd ..
-cp -rv p1/* usb1
+cp -r p1/* usb1
 rsync -a p2/ usb3/boot
 
 
