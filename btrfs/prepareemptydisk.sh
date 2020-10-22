@@ -27,8 +27,9 @@ cd usb3
 btrfs subvolume create boot
 cd ..
 cp -rv p1/* usb1
-rsync -avu p2/ usb3/1
+rsync -a p2/ usb3/boot
 
-losetup -D $loop
+
 umount {p1,p2,usb1,usb3}
 rm -rf {p1,p2,usb1,usb3}
+losetup -D $loop
