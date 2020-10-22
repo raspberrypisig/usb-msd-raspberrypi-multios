@@ -30,5 +30,5 @@ cp -rv p1/* usb1
 rsync -avu p2/ usb3/1
 
 losetup -D $loop
-umount {p1,p2,usb1,usb3}}
+umount {p1,p2,usb1,usb3}
 rm -rf {p1,p2,usb1,usb3}
