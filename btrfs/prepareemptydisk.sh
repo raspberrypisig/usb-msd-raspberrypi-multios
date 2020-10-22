@@ -5,7 +5,7 @@ raspbian_image="$1"
 usb_disk="$2"
 secondpartitionsize=${3:-10}
 
-sfdisk $usb_disk <<EOF
+sfdisk -f $usb_disk <<EOF
 label: gpt
 ,200MiB,EBD0A0A2-B9E5-4433-87C0-68B6B72699C7
 ,${secondpartitionsize}GiB,EBD0A0A2-B9E5-4433-87C0-68B6B72699C7
@@ -19,8 +19,8 @@ mkfs.btrfs -f "${usb_disk}p3"
 loop=$(losetup --show -Pf $raspbian_image)
 
 mkdir -p {p1,p2,usb1,usb3}
-mount ${loop}p1 p1
-mount ${loop}p2 p2
+mount -o ro ${loop}p1 p1
+mount -o ro ${loop}p2 p2
 mount ${usb_disk}p1 usb1
 mount ${usb_disk}p3 usb3
 cd usb3
