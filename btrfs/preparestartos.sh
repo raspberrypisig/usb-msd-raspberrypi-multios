@@ -2,11 +2,11 @@
 set -x
 
 disk="$1"
-bootfiles=usb-msd-raspberrypi-multios/btrfs/distros/boot/files/fat32
-linuxfiles=usb-msd-raspberrypi-multios/btrfs/distros/boot/files/btrfs
+bootfiles=multios/btrfs/distros/boot/files/fat32
+linuxfiles=multios/btrfs/distros/boot/files/linux
 
 apt install -y qemu qemu-user-static binfmt-support systemd-container
-git clone https://github.com/raspberrypisig/usb-msd-raspberrypi-multios
+git clone https://github.com/raspberrypisig/usb-msd-raspberrypi-multios multios
 
 mkdir -p usb3
 
