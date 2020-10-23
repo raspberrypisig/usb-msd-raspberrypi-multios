@@ -10,11 +10,13 @@ git clone https://github.com/raspberrypisig/usb-msd-raspberrypi-multios multios
 
 mkdir -p usb3
 
+mount|grep $disk|awk '{print $1}'|xargs umount
+
 mount -o subvol=boot ${disk}p3 usb3
 mount ${disk}p1 usb3/boot
 
-cp -r $bootfiles/* usb3/boot
-rsync -a $linuxfiles/ usb3
+cp -rv $bootfiles/* usb3/boot
+rsync -av $linuxfiles/ usb3
 
 #chmod +x setup.sh
 #cp setup.sh usb3
