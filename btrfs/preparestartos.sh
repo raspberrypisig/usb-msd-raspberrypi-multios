@@ -12,8 +12,7 @@ mkdir -p usb3
 
 mount|grep $disk|awk '{print $1}'|xargs umount
 
-mount -t btrfs -o subvol=boot ${disk}p3 usb3
-mount ${disk}p1 usb3/boot
+mount -t btrfs -o subvol=@boot ${disk}3 usb3
 
 cp -rv $bootfiles/* usb3/boot
 rsync -av $linuxfiles/ usb3
@@ -23,6 +22,6 @@ rsync -av $linuxfiles/ usb3
 #systemd-nspawn -D usb3 /setup.sh 
 #rm usb3/setup.sh
 
-umount usb3/boot
+
 umount usb3
 rm -rf usb3
