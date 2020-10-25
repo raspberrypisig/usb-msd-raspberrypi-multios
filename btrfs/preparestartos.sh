@@ -12,7 +12,7 @@ mkdir -p usb3
 
 mount|grep $disk|awk '{print $1}'|xargs umount
 
-mount -o subvol=boot ${disk}p3 usb3
+mount -t btrfs -o subvol=boot ${disk}p3 usb3
 mount ${disk}p1 usb3/boot
 
 cp -rv $bootfiles/* usb3/boot
