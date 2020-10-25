@@ -15,7 +15,7 @@ label: dos
 EOF
 
 mkfs.vfat "${usb_disk}p1"
-mkfs.ext4 "${usb_disk}p2"
+mkfs.ext4 -F "${usb_disk}p2"
 #mkfs.vfat "${usb_disk}p2"
 mkfs.btrfs -f "${usb_disk}p3"
 
