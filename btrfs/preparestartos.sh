@@ -2,7 +2,7 @@
 set -x
 
 disk="$1"
-bootfiles=multios/btrfs/distros/boot/files/fat32
+bootfiles=multios/btrfs/distros/boot/files/boot
 linuxfiles=multios/btrfs/distros/boot/files/linux
 setupscript=multios/btrfs/setup.sh
 
