@@ -9,9 +9,9 @@ mount|grep $usb_disk|awk '{print $1}'|xargs umount
 
 sfdisk -f $usb_disk <<EOF
 label: dos
-start=8192,200MiB,EBD0A0A2-B9E5-4433-87C0-68B6B72699C7
-,${secondpartitionsize}GiB,0FC63DAF-8483-4772-8E79-3D69D8477DE4
-,,0FC63DAF-8483-4772-8E79-3D69D8477DE4
+start=8192, size=200MiB, type=c
+,${secondpartitionsize}GiB,83
+,,83
 EOF
 
 mkfs.vfat "${usb_disk}p1"
