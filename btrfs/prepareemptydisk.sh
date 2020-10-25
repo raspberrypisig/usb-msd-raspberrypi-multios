@@ -27,7 +27,9 @@ mount -o ro ${loop}p2 p2
 mount ${usb_disk}p1 usb1
 mount ${usb_disk}p2 usb2
 mount ${usb_disk}p3 usb3
-btrfs subvolume create usb3/boot
+cd usb3
+btrfs subvolume create boot
+cd ..
 cp -r p1/* usb1
 rsync -a p2/ usb3/boot
 rsync -a p2/ usb2
