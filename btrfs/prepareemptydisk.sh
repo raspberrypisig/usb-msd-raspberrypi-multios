@@ -5,6 +5,8 @@ raspbian_image="$1"
 usb_disk="$2"
 secondpartitionsize=${3:-10}
 
+mount|grep $disk|awk '{print $1}'|xargs umount
+
 sfdisk -f $usb_disk <<EOF
 label: gpt
 ,200MiB,EBD0A0A2-B9E5-4433-87C0-68B6B72699C7
