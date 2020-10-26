@@ -30,7 +30,7 @@ cd usb3
 btrfs subvolume create @boot
 cd ..
 cp -r p1/* usb1
-rsync -a p2/ usb3/boot
+rsync -a p2/ usb3/@boot
 
 umount {p1,p2,usb1,usb3}
 rm -rf {p1,p2,usb1,usb3}
