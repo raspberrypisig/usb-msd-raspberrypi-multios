@@ -9,13 +9,15 @@ setupscript=multios/btrfs/setup.sh
 apt install -y qemu qemu-user-static binfmt-support systemd-container git
 git clone https://github.com/raspberrypisig/usb-msd-raspberrypi-multios multios
 
-mkdir -p usb3
+
+mkdir -p {usb1,usb3}
 
 mount|grep $disk|awk '{print $1}'|xargs umount
 
+mount ${disk}1 usb1
 mount -t btrfs -o subvol=@boot ${disk}3 usb3
 
-cp -rv $bootfiles/* usb3/boot
+cp -rv $bootfiles/* usb1
 rsync -av $linuxfiles/ usb3
 
 #chmod +x $setupscript
@@ -24,5 +26,5 @@ rsync -av $linuxfiles/ usb3
 #rm usb3/setup.sh
 
 
-umount usb3
-rm -rf usb3
+umount {usb1,usb3}
+rm -rf {usb1,usb3}
