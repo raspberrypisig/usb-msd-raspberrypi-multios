@@ -20,10 +20,12 @@ mount -t btrfs -o subvol=@boot ${disk}3 usb3
 cp -rv $bootfiles/* usb1
 rsync -av $linuxfiles/ usb3
 
-#chmod +x $setupscript
-#cp $setupscript usb3
-#systemd-nspawn -D usb3 /setup.sh 
-#rm usb3/setup.sh
+chmod +x $setupscript
+cp $setupscript usb3
+systemd-nspawn -D usb3 /setup.sh
+cp usb3/initramfs-btrfs usb1
+rm usb3/initramfs-btrfs
+rm usb3/setup.sh
 
 
 umount {usb1,usb3}
