@@ -31,11 +31,12 @@ createsubvolumename() {
 runcontainer() {
 setupscript="$1"
 containerdir="$2"
+volname="$3"
 apt install -y qemu qemu-user-static binfmt-support systemd-container
 
 chmod +x $setupscript
 cp $setupscript usb3
-systemd-nspawn -D $containerdir /setup.sh
+systemd-nspawn -D $containerdir /setup.sh $volname
 rm usb3/setup.sh
 }
 
@@ -54,7 +55,7 @@ then
   cp -r p1/* usb3/${volname}/boot
   cp -r ${bootdir}/* usb3/$volname/boot
   rsync -a "$linuxdir/" usb3/$volname
-  #runcontainer $setupscript usb3/${volname}
+  runcontainer $setupscript usb3/${volname} $volname
   umount {p1,p2,usb3}
   rm -rf {p1,p3,usb3}
 fi
