@@ -18,6 +18,8 @@ git clone https://github.com/raspberrypisig/usb-msd-raspberrypi-multios multios
 
 distrodir="multios/btrfs/distros/${distro}"
 setupscript=$distrodir/setup.sh
+bootdir="$distrodir/boot"
+linuxdir="$distrodir/linux"
 
 createsubvolumename() {
   name="$1"
@@ -49,7 +51,9 @@ then
   mount -o ro ${loop}p1 p1 
   mount -o ro ${loop}p2 p2
   rsync -a p2/ usb3/${volname}
-  rsync -a p1/ usb3/${volname}/boot
+  cp -r p1/* usb3/${volname}/boot
+  cp -r ${bootdir}/* usb3/$volname/boot
+  rsync -a "$linuxdir/" usb3/$volname
   #runcontainer $setupscript usb3/${volname}
   umount {p1,p2,usb3}
   rm -rf {p1,p3,usb3}
