@@ -57,7 +57,7 @@ then
   rsync -a "$linuxdir/" usb3/$volname
   runcontainer $setupscript usb3/${volname} $volname
   umount {p1,p2,usb3}
-  rm -rf {p1,p3,usb3}
+  rm -rf {p1,p2,usb3}
 fi
 
 rm -rf multios
