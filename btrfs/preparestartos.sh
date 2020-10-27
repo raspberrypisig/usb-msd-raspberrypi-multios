@@ -29,4 +29,4 @@ rm usb3/setup.sh
 
 
 umount {usb1,usb3}
-rm -rf {usb1,usb3}
+rm -rf {usb1,usb3,multios}
