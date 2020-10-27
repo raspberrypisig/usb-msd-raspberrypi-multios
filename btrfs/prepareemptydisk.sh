@@ -1,6 +1,12 @@
 #!/usr/bin/env bash
 set -x
 
+if [ $# -ne 2 ];
+then
+ echo $0 [raspbian_image] [usb_disk]
+ exit 1
+fi
+
 raspbian_image="$1"
 usb_disk="$2"
 
