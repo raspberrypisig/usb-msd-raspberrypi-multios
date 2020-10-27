@@ -5,14 +5,13 @@ set -x
 if [ $# -ne 4 ];
 then
  echo multip4 [distro] [diskimage] [disk] [name]
+ exit 1
 fi
 
 distro="$1"
 diskimage="$2"
 disk="$3"
 name="$4"
-
-
 
 apt install -y git
 git clone https://github.com/raspberrypisig/usb-msd-raspberrypi-multios multios
@@ -24,7 +23,7 @@ createsubvolumename() {
   name="$1"
   typeset -l newvolname
   newvolname=${name// /_}
-  echo $newvolname  
+  echo @$newvolname  
 }
 
 runcontainer() {
@@ -43,7 +42,7 @@ then
   mkdir -p {p1,p2,usb3}
   mount ${disk}3 usb3
   cd usb3
-  volname=$(createsubvolumename $name)
+  volname=$(createsubvolumename "$name")
   btrfs subvolume create $volname
   cd ..
   loop=$(losetup --show -Pf $diskimage)
@@ -51,8 +50,9 @@ then
   mount -o ro ${loop}p2 p2
   rsync -a p2/ usb3/${volname}
   rsync -a p1/ usb3/${volname}/boot
-  runcontainer $setupscript usb3/${volname}
+  #runcontainer $setupscript usb3/${volname}
   umount {p1,p2,usb3}
+  rm -rf {p1,p3,usb3}
 fi
 
 rm -rf multios
