@@ -57,7 +57,7 @@
 dtparam=audio=on
 
 # added by raspberrypisig
-initramfs initramfs-brtfs.gz
+initramfs initramfs-brtfs
 dtparam=sd_poll_once=on
 
 [pi4]
