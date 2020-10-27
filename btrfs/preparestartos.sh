@@ -4,7 +4,7 @@ set -x
 disk="$1"
 bootfiles=multios/btrfs/distros/boot/files/boot
 linuxfiles=multios/btrfs/distros/boot/files/linux
-setupscript=multios/btrfs/setup.sh
+setupscript=multios/btrfs/distros/boot/setup.sh
 
 apt install -y qemu qemu-user-static binfmt-support systemd-container git
 git clone https://github.com/raspberrypisig/usb-msd-raspberrypi-multios multios
