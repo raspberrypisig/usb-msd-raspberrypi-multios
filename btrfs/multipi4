@@ -35,9 +35,9 @@ volname="$3"
 apt install -y qemu qemu-user-static binfmt-support systemd-container
 
 chmod +x $setupscript
-cp $setupscript usb3
+cp $setupscript usb3/$volname
 systemd-nspawn -D $containerdir /setup.sh $volname
-rm usb3/setup.sh
+rm usb3/$volname/setup.sh
 }
 
 if [ -d $distrodir ];
