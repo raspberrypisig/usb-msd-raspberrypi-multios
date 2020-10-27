@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -x
+
 if [ $# -ne 4 ];
 then
  echo multip4 [distro] [diskimage] [disk] [name]
