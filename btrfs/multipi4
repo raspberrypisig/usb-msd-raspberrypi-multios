@@ -42,7 +42,8 @@ rm usb3/$volname/setup.sh
 
 if [ -d $distrodir ];
 then
-  mkdir -p {p1,p2,usb3}
+  mkdir -p {p1,p2,usb2,usb3}
+  mount ${disk}2 usb2
   mount ${disk}3 usb3
   cd usb3
   volname=$(createsubvolumename "$name")
@@ -56,8 +57,9 @@ then
   cp -r ${bootdir}/* usb3/$volname/boot
   rsync -a "$linuxdir/" usb3/$volname
   runcontainer $setupscript usb3/${volname} $volname
-  umount {p1,p2,usb3}
-  rm -rf {p1,p2,usb3}
+  echo $name >> usb2/oslist.txt
+  umount {p1,p2,usb2,usb3}
+  rm -rf {p1,p2,usb2,usb3}
   losetup -D $loop
 fi
 
