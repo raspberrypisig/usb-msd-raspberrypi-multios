@@ -6,7 +6,7 @@ volname="$1"
 apt update
 apt install -y initramfs-tools btrfs-tools btrfs-progs
 VERSION=$(find /lib/modules -name *v7l+ -exec basename {} \; )
-mkinitramfs -o /initramfs-btrfs -v $VERSION
+mkinitramfs -o /boot/initramfs-btrfs -v $VERSION
 
 sed -i "s/PLACEHOLDER/$volname/" /boot/cmdline.txt 
 sed -i "s/PLACEHOLDER/$volname/" /etc/fstab
