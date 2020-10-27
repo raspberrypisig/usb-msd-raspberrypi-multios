@@ -1,6 +1,12 @@
 #!/usr/bin/env bash
 set -x
 
+if [ $# -ne 1 ];
+then
+ echo $0 [disk]
+ exit 1
+fi
+
 disk="$1"
 bootfiles=multios/btrfs/distros/boot/files/boot
 linuxfiles=multios/btrfs/distros/boot/files/linux
