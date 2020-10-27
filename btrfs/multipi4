@@ -58,6 +58,7 @@ then
   runcontainer $setupscript usb3/${volname} $volname
   umount {p1,p2,usb3}
   rm -rf {p1,p2,usb3}
+  losetup -D $loop
 fi
 
 rm -rf multios
