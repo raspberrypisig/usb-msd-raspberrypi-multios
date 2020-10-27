@@ -8,8 +8,8 @@ then
 fi
 
 disk="$1"
-bootfiles=multios/btrfs/distros/boot/files/boot
-linuxfiles=multios/btrfs/distros/boot/files/linux
+bootfiles=multios/btrfs/distros/boot/boot
+linuxfiles=multios/btrfs/distros/boot/linux
 setupscript=multios/btrfs/distros/boot/setup.sh
 
 apt install -y qemu qemu-user-static binfmt-support systemd-container git
