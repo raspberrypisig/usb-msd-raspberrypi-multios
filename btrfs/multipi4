@@ -1,0 +1,56 @@
+#!/usr/bin/env bash
+
+if [ $# -ne 4 ];
+then
+ echo multip4 [distro] [diskimage] [disk] [name]
+fi
+
+distro="$1"
+diskimage="$2"
+disk="$3"
+name="$4"
+
+
+
+apt install -y git
+git clone https://github.com/raspberrypisig/usb-msd-raspberrypi-multios multios
+
+distrodir="multios/btrfs/distros/${distro}"
+setupscript=$distrodir/setup.sh
+
+createsubvolumename() {
+  name="$1"
+  typeset -l newvolname
+  newvolname=${name// /_}
+  echo $newvolname  
+}
+
+runcontainer() {
+setupscript="$1"
+containerdir="$2"
+apt install -y qemu qemu-user-static binfmt-support systemd-container
+
+chmod +x $setupscript
+cp $setupscript usb3
+systemd-nspawn -D $containerdir /setup.sh
+rm usb3/setup.sh
+}
+
+if [ -d $distrodir ];
+then
+  mkdir -p {p1,p2,usb3}
+  mount ${disk}3 usb3
+  cd usb3
+  volname=$(createsubvolumename $name)
+  btrfs subvolume create $volname
+  cd ..
+  loop=$(losetup --show -Pf $diskimage)
+  mount -o ro ${loop}p1 p1 
+  mount -o ro ${loop}p2 p2
+  rsync -a p2/ usb3/${volname}
+  rsync -a p1/ usb3/${volname}/boot
+  runcontainer $setupscript usb3/${volname}
+  umount {p1,p2,usb3}
+fi
+
+rm -rf multios
