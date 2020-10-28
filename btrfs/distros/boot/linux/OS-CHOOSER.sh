@@ -45,7 +45,7 @@ then
 fi
 
 mkdir -p $TEMP_DIR/$volname
-cp -rv $BTRFS_DIR/@${volname}/boot/* $TEMP_DIR/$volname
+cp -r $BTRFS_DIR/@${volname}/boot/* $TEMP_DIR/$volname
 
 umount $BTRFS_DIR
 umount $TEMP_DIR
