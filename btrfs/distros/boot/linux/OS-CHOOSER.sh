@@ -51,3 +51,4 @@ umount $BTRFS_DIR
 umount $TEMP_DIR
 rm -rf $BTRFS_DIR
 rm -rf $TEMP_DIR
+reboot 2
