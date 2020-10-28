@@ -2,16 +2,20 @@
 
 set -x
 
-mkdir -p /tmp/usb2
-mount /dev/sda2 /tmp/usb2
-if [ -f /tmp/usb2/oslist.txt ];
+TEMP_DIR=/tmp/usb2
+USB_DISK=/dev/sda
+
+mkdir -p $TEMP_DIR
+mount ${USB_DISK}2 $TEMP_DIR
+if [ -f $TEMP_DIR/oslist.txt ];
 then
   options=()
   while read line
   do
     options+=("$line" "$line")
-  done < /tmp/usb2/oslist.txt
-  echo "${options[@]}"
+  done < $TEMP_DIR/oslist.txt
 fi
 umount /tmp/usb2
 rm -rf /tmp/usb2
+
+CHOICE=$(whiptail --title "Choose OS" --menu " "  --nocancel --noitem   20 70 5 "${options[@]}" 3>&1 1>&2 2>&3)
