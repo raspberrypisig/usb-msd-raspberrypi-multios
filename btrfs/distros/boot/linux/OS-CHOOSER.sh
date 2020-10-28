@@ -35,14 +35,19 @@ fi
 
 mkdir $TEMP_DIR/$volname
 mkdir -p $BTRFS_DIR
-mount ${USB_DIR}3 $BTRFS_DIR
-cp $BTRFS_DIR/$volname/boot/config $TEMP_DIR
-echo "os_prefix=$volname" >> $TEMP_DIR/config.txt
-mkdir $TEMP_DIR/$volname
-cp -rv $BTRFS_DIR/boot/* $TEMP_DIR/$volname
+mount ${USB_DISK}3 $BTRFS_DIR
+cp "$BTRFS_DIR/@${volname}/boot/config.txt" $TEMP_DIR 
+echo "os_prefix=${volname}/" >> $TEMP_DIR/config.txt
+
+if [ -d $TEMP_DIR/$volname ];
+then
+  rm -rf $TEMP_DIR/$volname
+fi
+
+mkdir -p $TEMP_DIR/$volname
+cp -rv $BTRFS_DIR/@${volname}/boot/* $TEMP_DIR/$volname
 
 umount $BTRFS_DIR
 umount $TEMP_DIR
 rm -rf $BTRFS_DIR
 rm -rf $TEMP_DIR
-
