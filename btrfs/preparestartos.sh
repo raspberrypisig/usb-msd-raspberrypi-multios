@@ -35,7 +35,7 @@ rm usb3/initramfs-btrfs
 rm usb3/setup.sh
 
 svn co https://github.com/raspberrypi/firmware/trunk/boot
-cp boot/* usb2
+cp boot/start* boot/fixup* usb2
 rm -rf boot
 
 umount {usb1,usb2,usb3}
