@@ -89,6 +89,6 @@ rm -rf {usb1,usb2,usb3,multios}
 
 }
 
-prepare_empty_disk "$1" "$2" "$3"
-prepare_boot_os "$2"
+prepare_empty_disk $raspbian_image $usb_disk $second_partition_size
+prepare_boot_os $usb_disk
 
