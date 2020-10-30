@@ -18,7 +18,7 @@ prepare_empty_disk() {
 
 raspbian_image="$1"
 usb_disk="$2"
-seccond_partition_size="$3"
+second_partition_size="$3"
 
 sfdisk -f $usb_disk <<EOF
 label: dos
