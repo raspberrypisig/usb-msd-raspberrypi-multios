@@ -84,7 +84,7 @@ cp boot/start* boot/fixup* usb2
 cp boot/start* boot/fixup* usb1
 rm -rf boot
 
-umount {usb1,usb3}
+umount {usb1,usb2,usb3}
 rm -rf {usb1,usb2,usb3,multios}
 
 }
