@@ -13,6 +13,10 @@ diskimage="$2"
 disk="$3"
 name="$4"
 
+rm -rf /tmp/multipi4
+mkdir /tmp/multipi4
+cd /tmp/multipi4
+
 umount ${diskimage}1
 umount ${diskimage}2
 umount ${diskimage}3
