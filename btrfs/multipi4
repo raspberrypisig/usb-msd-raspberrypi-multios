@@ -17,9 +17,9 @@ rm -rf /tmp/multipi4
 mkdir /tmp/multipi4
 cd /tmp/multipi4
 
-umount ${diskimage}1
-umount ${diskimage}2
-umount ${diskimage}3
+umount ${disk}1
+umount ${disk}2
+umount ${disk}3
 
 apt install -y git
 git clone https://github.com/raspberrypisig/usb-msd-raspberrypi-multios multios
