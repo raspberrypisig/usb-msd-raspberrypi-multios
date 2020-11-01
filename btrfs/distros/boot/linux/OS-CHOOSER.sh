@@ -3,7 +3,7 @@
 set -x
 
 TEMP_DIR=/tmp/usb2
-USB_DISK=/dev/sda
+USB_DISK=$(findmnt -no SOURCE /boot | sed 's/1//')
 BTRFS_DIR=/tmp/usb3
 
 createsubvolumename() {
@@ -28,16 +28,14 @@ CHOICE=$(whiptail --title "Choose OS" --menu " "  --nocancel --noitem   20 70 5 
 volname=$(createsubvolumename "$CHOICE")
 echo $volname
 
-if [ -d $TEMP_DIR/$volname ];
-then
-  rm -rf $TEMP_DIR/$volname
-fi
+find . -mindepth 1 -type d -exec "rm -rf {}" \;
 
 mkdir $TEMP_DIR/$volname
 mkdir -p $BTRFS_DIR
 mount ${USB_DISK}3 $BTRFS_DIR
 cp "$BTRFS_DIR/@${volname}/boot/config.txt" $TEMP_DIR 
 echo "os_prefix=${volname}/" >> $TEMP_DIR/config.txt
+echo "dtparam=sd_poll_once=on" >> $TEMP_DIR/config.txt
 
 if [ -d $TEMP_DIR/$volname ];
 then
