@@ -15,9 +15,10 @@ createsubvolumename() {
 
 mkdir -p $TEMP_DIR
 mount ${USB_DISK}2 $TEMP_DIR
+options=()
+
 if [ -f $TEMP_DIR/oslist.txt ];
 then
-  options=()
   while read line
   do
     options+=("$line" "$line")
