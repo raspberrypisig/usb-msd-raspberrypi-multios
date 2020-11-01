@@ -12,6 +12,10 @@ raspbian_image="$1"
 usb_disk="$2"
 fat32_partition_size=300
 
+rm -rf /tmp/multipi4
+mkdir /tmp/multipi4
+cd /tmp/multipi4
+
 mount|grep $usb_disk|awk '{print $1}'|xargs umount
 
 prepare_empty_disk() {
