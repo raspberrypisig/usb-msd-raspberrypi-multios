@@ -23,6 +23,9 @@ then
   do
     options+=("$line" "$line")
   done < $TEMP_DIR/oslist.txt
+else
+  echo "No OSes installed."
+  exit 1
 fi
 
 CHOICE=$(whiptail --title "Choose OS" --menu " "  --nocancel --noitem   20 70 5 "${options[@]}" 3>&1 1>&2 2>&3)
