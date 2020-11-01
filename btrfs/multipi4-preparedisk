@@ -10,7 +10,7 @@ fi
 
 raspbian_image="$1"
 usb_disk="$2"
-second_partition_size=${3:-1} # size in GB
+fat32_partition_size=300
 
 mount|grep $usb_disk|awk '{print $1}'|xargs umount
 
@@ -22,8 +22,8 @@ second_partition_size="$3"
 
 sfdisk -f $usb_disk <<EOF
 label: dos
-,200MiB,c
-,${second_partition_size}GiB,c
+,${fat32_partition_size}MiB,c
+,${fat32_partition_size}MiB,c
 ,,83
 EOF
 
