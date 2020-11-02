@@ -4,7 +4,7 @@ set -x
 
 if [ $# -ne 2 ];
 then
- echo $0 [raspbian_image] [usb_disk]
+ echo $0 [raspbian_lite_image] [usb_disk]
  exit 1
 fi
 
