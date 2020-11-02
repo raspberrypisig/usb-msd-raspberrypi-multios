@@ -6,8 +6,14 @@ echo btrfs >> /etc/initramfs-tools/modules
 VERSION=$(find /lib/modules -name *v7l+ -exec basename {} \; )
 mkinitramfs -o /initramfs-btrfs -v $VERSION
 # Disable kernel updates
-sudo apt-mark hold libraspberrypi-bin libraspberrypi-dev libraspberrypi-doc libraspberrypi0
-sudo apt-mark hold raspberrypi-bootloader raspberrypi-kernel raspberrypi-kernel-headers
+apt-mark hold libraspberrypi-bin libraspberrypi-dev libraspberrypi-doc libraspberrypi0
+apt-mark hold raspberrypi-bootloader raspberrypi-kernel raspberrypi-kernel-headers
 
-systemctl disable resize2fs_once
-systemctl disable dphys-swapfile
+services_disable=("resize2fs_once" "networking" "dhcpcd" "rpi-eeprom-update" "avahi-daemon" "dphys-swapfile" "wpa_supplicant" "rc-local" )
+
+for service in "${services_disable[@]}"
+do
+  systemctl disable $service
+done
+
+
