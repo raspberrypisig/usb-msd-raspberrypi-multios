@@ -11,6 +11,7 @@ apt-mark hold raspberrypi-bootloader raspberrypi-kernel raspberrypi-kernel-heade
 
 services_disable=("resize2fs_once" "networking" "dhcpcd" "rpi-eeprom-update" "avahi-daemon" "dphys-swapfile" "wpa_supplicant" "rc-local" )
 services_enable=("oschooser")
+services_mask=("raspi-config")
 
 for service in "${services_disable[@]}"
 do
@@ -20,6 +21,11 @@ done
 for service in "${services_enable[@]}"
 do
   systemctl enable $service
+done
+
+for service in "${services_mask[@]}"
+do
+  systemctl mask $service
 done
 
 
