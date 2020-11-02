@@ -10,10 +10,17 @@ apt-mark hold libraspberrypi-bin libraspberrypi-dev libraspberrypi-doc libraspbe
 apt-mark hold raspberrypi-bootloader raspberrypi-kernel raspberrypi-kernel-headers
 
 services_disable=("resize2fs_once" "networking" "dhcpcd" "rpi-eeprom-update" "avahi-daemon" "dphys-swapfile" "wpa_supplicant" "rc-local" )
+services_enable=("oschooser")
 
 for service in "${services_disable[@]}"
 do
   systemctl disable $service
 done
+
+for service in "${services_enable[@]}"
+do
+  systemctl enable $service
+done
+
 
 
