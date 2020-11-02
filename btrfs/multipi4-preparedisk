@@ -34,7 +34,7 @@ EOF
 partprobe "${usb_disk}"
 sleep 1
 mkfs.vfat "${usb_disk}1"
-mkfs.vfat "${usb_disk}2"
+mkfs.vfat -n MULTIPI4 "${usb_disk}2"
 mkfs.btrfs -f "${usb_disk}3"
 
 loop=$(losetup --show -Pf $raspbian_image)
