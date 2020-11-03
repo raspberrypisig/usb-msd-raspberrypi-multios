@@ -8,7 +8,7 @@ mkinitramfs -o /initramfs-btrfs -v $VERSION
 # Disable kernel updates
 apt-mark hold libraspberrypi-bin libraspberrypi-dev libraspberrypi-doc libraspberrypi0
 apt-mark hold raspberrypi-bootloader raspberrypi-kernel raspberrypi-kernel-headers
-apt remove --purge openssh-server
+apt remove -y --purge openssh-server
 
 services_disable=("resize2fs_once" "networking" "dhcpcd" "rpi-eeprom-update" "avahi-daemon" "dphys-swapfile" "wpa_supplicant" "rc-local" )
 services_enable=("oschooser")
