@@ -12,3 +12,5 @@ https://build-system.fman.io/
 Connect pyqt5 to ui
 
 https://nitratine.net/blog/post/how-to-import-a-pyqt5-ui-file-in-a-python-gui/
+
+https://github.com/mherrmann/fbs-tutorial
