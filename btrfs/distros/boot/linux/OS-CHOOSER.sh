@@ -32,7 +32,7 @@ CHOICE=$(whiptail --title "Choose OS" --menu " "  --nocancel --noitem   20 70 5 
 volname=$(createsubvolumename "$CHOICE")
 echo $volname
 
-find $TEMP_DIR -mindepth 1 -type d -exec "rm -rf {}" \;
+find $TEMP_DIR -mindepth 1 -type d -exec rm -rf '{}' \;
 
 mkdir $TEMP_DIR/$volname
 mkdir -p $BTRFS_DIR
