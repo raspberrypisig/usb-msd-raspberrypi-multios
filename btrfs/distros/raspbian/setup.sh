@@ -6,6 +6,8 @@ volname="$1"
 apt update
 apt install -y initramfs-tools btrfs-tools btrfs-progs
 
+raspi-config nonint do_configure_keyboard us
+
 echo btrfs >> /etc/initramfs-tools/modules
 
 VERSION=$(find /lib/modules -name *v7l+ -exec basename {} \; )
