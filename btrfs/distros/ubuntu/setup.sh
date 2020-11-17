@@ -18,3 +18,5 @@ sed -i "s/PLACEHOLDER/$volname/" /boot/cmdline.txt
 sed -i "s/PLACEHOLDER/$volname/" /etc/fstab
 
 cp /etc/resolv.conf.old /etc/resolv.conf
+
+apt-mark hold linux-headers-$VERSION linux-modules-$VERSION linux-image-$VERSION
