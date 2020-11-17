@@ -37,7 +37,14 @@ find $TEMP_DIR -mindepth 1 -type d -exec rm -rf '{}' \;
 mkdir $TEMP_DIR/$volname
 mkdir -p $BTRFS_DIR
 mount ${USB_DISK}3 $BTRFS_DIR
+
+if [ -d $BTRFS_DIR/@${volname}/boot/firmware ];
+then
+cp "$BTRFS_DIR/@${volname}/boot/firmware/config.txt" $TEMP_DIR 
+else
 cp "$BTRFS_DIR/@${volname}/boot/config.txt" $TEMP_DIR 
+fi
+
 echo "os_prefix=${volname}/" >> $TEMP_DIR/config.txt
 echo "dtparam=sd_poll_once=on" >> $TEMP_DIR/config.txt
 
@@ -47,7 +54,14 @@ then
 fi
 
 mkdir -p $TEMP_DIR/$volname
+
+if [ $BTRFS_DIR/@${volname}/boot/firmware ];
+then
+cp -r $BTRFS_DIR/@${volname}/boot/firmware/* $TEMP_DIR/$volname
+else
 cp -r $BTRFS_DIR/@${volname}/boot/* $TEMP_DIR/$volname
+fi
+
 
 umount $BTRFS_DIR
 umount $TEMP_DIR
