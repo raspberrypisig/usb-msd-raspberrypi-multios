@@ -5,7 +5,7 @@ max_framebuffers=2
 arm_64bit=1
 kernel=vmlinuz
 cmdline=cmdline.txt
-initramfs initrd-btrfs followkernel
+initramfs initrd.img followkernel
 
 # Enable the audio output, I2C and SPI interfaces on the GPIO header
 dtparam=audio=on
