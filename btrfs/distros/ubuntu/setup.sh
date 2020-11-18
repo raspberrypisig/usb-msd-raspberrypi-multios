@@ -3,7 +3,7 @@ set -x
 
 volname="$1"
 
-cp /etc/resolv.conf /etc/resolv.conf.old
+mv /etc/resolv.conf /etc/resolv.conf.old
 echo nameserver 8.8.8.8 > /etc/resolv.conf
 
 apt update
@@ -17,6 +17,6 @@ update-initramfs -c -k $VERSION
 sed -i "s/PLACEHOLDER/$volname/" /boot/cmdline.txt 
 sed -i "s/PLACEHOLDER/$volname/" /etc/fstab
 
-cp /etc/resolv.conf.old /etc/resolv.conf
+mv /etc/resolv.conf.old /etc/resolv.conf
 
 apt-mark hold linux-headers-$VERSION linux-modules-$VERSION linux-image-$VERSION
