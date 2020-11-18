@@ -14,7 +14,7 @@ echo btrfs >> /etc/initramfs-tools/modules
 VERSION=$(find /lib/modules -name '*-raspi' -exec basename {} \; )
 update-initramfs -c -k $VERSION
 
-sed -i "s/PLACEHOLDER/$volname/" /boot/cmdline.txt 
+sed -i "s/PLACEHOLDER/$volname/" /boot/firmware/cmdline.txt 
 sed -i "s/PLACEHOLDER/$volname/" /etc/fstab
 
 mv /etc/resolv.conf.old /etc/resolv.conf
