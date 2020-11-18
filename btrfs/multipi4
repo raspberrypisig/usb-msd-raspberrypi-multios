@@ -61,8 +61,16 @@ then
   mount -o ro ${loop}p1 p1 
   mount -o ro ${loop}p2 p2
   rsync -a p2/ usb3/${volname}
+  
+  if [ -d usb3/${volname}/boot/firmware ];
+  then
+  cp -r p1/* usb3/${volname}/boot/firmware
+  cp -r ${bootdir}/* usb3/$volname/boot/firmware  
+  else
   cp -r p1/* usb3/${volname}/boot
   cp -r ${bootdir}/* usb3/$volname/boot
+  fi
+  
   rsync -a "$linuxdir/" usb3/$volname
   runcontainer $setupscript usb3/${volname} $volname
   echo $name >> usb2/oslist.txt
