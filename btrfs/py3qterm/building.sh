@@ -17,6 +17,7 @@ cd test
 PYTHON_CONFIGURE_OPTS="--enable-shared" pyenv install 3.6.8
 pyenv local 3.6.8
 python --version
+pip install fbs PyQt5==5.9.2
 apt install -y ruby ruby-dev rubygems
 gem install --no-document fpm
 #fbs startproject
