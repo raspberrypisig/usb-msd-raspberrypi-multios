@@ -13,7 +13,6 @@ export PATH="/root/.pyenv/bin:$PATH"
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 
-cd /mnt
 mkdir test
 cd test
 PYTHON_CONFIGURE_OPTS="--enable-shared" pyenv install 3.6.8
