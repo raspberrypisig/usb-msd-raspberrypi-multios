@@ -9,7 +9,9 @@ eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 EOF
 
-source ~/.bashrc
+export PATH="/root/.pyenv/bin:$PATH"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
 
 cd /mnt
 mkdir test
