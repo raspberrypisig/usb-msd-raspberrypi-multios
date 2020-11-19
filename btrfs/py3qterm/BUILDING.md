@@ -3,7 +3,7 @@
 ```
 #!/usr/bin/env bash
 
-apt install -y git
+apt install -y git build-essential
 curl https://pyenv.run | bash
 
 cat<<EOF
