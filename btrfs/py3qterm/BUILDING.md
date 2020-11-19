@@ -12,6 +12,10 @@ EOF > ~/.bashrc
 
 source ~/.bashrc
 
+cd /mnt
+mkdir test
+cd test
+pyenv install 3.6.8
 
 
 ```
