@@ -1,9 +1,11 @@
 # BUILDING
 
+#### Ubuntu/Linux Mint
+
 ```
 #!/usr/bin/env bash
 
-apt install -y git build-essential
+apt install -y git build-essential zlib1g-dev
 curl https://pyenv.run | bash
 
 cat<<EOF
