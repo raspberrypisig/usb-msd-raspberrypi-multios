@@ -17,3 +17,9 @@ cd test
 PYTHON_CONFIGURE_OPTS="--enable-shared" pyenv install 3.6.8
 pyenv local 3.6.8
 python --version
+apt install -y ruby ruby-dev rubygems
+gem install --no-document fpm
+#fbs startproject
+#fbs run
+#fbs freeze
+#fbs installer
