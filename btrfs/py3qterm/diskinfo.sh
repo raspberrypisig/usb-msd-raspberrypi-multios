@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -x
+
 usbdevices=$(readlink -f /dev/disk/by-id/usb*|sed -r  '/[0-9]+/d'|sort)
 
 for usbdisk in $usbdevices
