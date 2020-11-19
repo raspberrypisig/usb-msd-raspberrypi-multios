@@ -11,5 +11,5 @@ do
   
   capacity=$(fdisk -l $usbdisk|head -n1|awk '{print $3 " " $4}'|cut -f1 -d',')
   
-  echo "$model $vendor $capacity"
+  echo "$vendor $model $capacity"
 done
