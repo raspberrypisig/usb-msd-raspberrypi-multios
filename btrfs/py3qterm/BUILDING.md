@@ -19,7 +19,7 @@ source ~/.bashrc
 cd /mnt
 mkdir test
 cd test
-pyenv install 3.6.8
+env PYTHON_CONFIGURE_OPTS="--enable-shared" pyenv install 3.6.8
 pyenv local 3.6.8
 python --version
 ```
