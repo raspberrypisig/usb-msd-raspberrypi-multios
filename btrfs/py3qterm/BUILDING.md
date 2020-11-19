@@ -18,6 +18,6 @@ cd /mnt
 mkdir test
 cd test
 pyenv install 3.6.8
-
-
+pyenv local 3.6.8
+python --version
 ```
