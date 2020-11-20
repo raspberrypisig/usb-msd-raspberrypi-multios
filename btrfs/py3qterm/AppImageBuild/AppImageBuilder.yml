@@ -14,8 +14,8 @@ AppDir:
   path: ./AppDir
 
   app_info:
-    id: org.appimage-crafters.python-appimage-example
-    name: python appimage hello world
+    id: com.mohangupta.multipi4
+    name: MultiPi4
     icon: utilities-terminal
     version: 0.1.0
     # Set the python executable as entry point
