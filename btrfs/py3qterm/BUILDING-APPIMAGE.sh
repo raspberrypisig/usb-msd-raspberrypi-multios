@@ -5,5 +5,6 @@ wget https://github.com/AppImage/AppImageKit/releases/download/continuous/appima
 chmod +x /usr/local/bin/appimagetool
 pip3 install appimage-builder
 svn co https://github.com/AppImageCrafters/appimage-builder/trunk/examples/pyqt5
-
+cd pyqt5
+appimage-builder --skip-tests
 
