@@ -7,7 +7,9 @@ form_2, base_2 = uic.loadUiType('choosedisk.ui')
 import subprocess
 
 output = subprocess.check_output(['bash', 'diskinfo.sh'])
-print(output)
+niceoutput = output.decode("UTF-8")
+print(niceoutput)
+
 
 
 class ChooseDiskDialog(base_2, form_2):
