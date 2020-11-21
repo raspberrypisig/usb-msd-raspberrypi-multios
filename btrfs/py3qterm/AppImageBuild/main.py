@@ -13,12 +13,18 @@ disks = niceoutput.split('\n')
 if len(disks) > 0:
     disks = disks[:-1]    
 print(disks)
+disks = ["SELECT DISK"] + disks
 
 class ChooseDiskDialog(base_2, form_2):
     def __init__(self):
         super(base_2, self).__init__()
         self.setupUi(self)
         self.comboBox.addItems(disks)
+        self.pushButton.clicked.connect(self.accept)
+
+    def accept(self):
+        if self.comboBox.currentText() != "SELECT DISK":
+            super().accept()
 
 
 class Ui(base_1, form_1):
