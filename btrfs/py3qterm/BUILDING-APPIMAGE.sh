@@ -7,4 +7,6 @@ pip3 install git+https://github.com/AppImageCrafters/appimage-builder.git
 svn co https://github.com/raspberrypisig/usb-msd-raspberrypi-multios/trunk/btrfs/py3qterm/AppImageBuild
 cd AppImageBuild
 appimage-builder --skip-tests
+rm -rf *.AppImage
+appimage-builder --skip-tests
 
