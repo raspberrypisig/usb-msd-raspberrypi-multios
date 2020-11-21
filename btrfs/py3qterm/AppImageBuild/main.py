@@ -10,6 +10,7 @@ output = subprocess.check_output(['bash', 'diskinfo.sh'])
 niceoutput = output.decode("UTF-8")
 print(niceoutput)
 disks = niceoutput.split()
+print(disks)
 
 
 class ChooseDiskDialog(base_2, form_2):
