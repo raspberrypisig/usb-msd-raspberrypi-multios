@@ -9,9 +9,8 @@ import subprocess
 output = subprocess.check_output(['bash', 'diskinfo.sh'])
 niceoutput = output.decode("UTF-8")
 print(niceoutput)
-disks = niceoutput.split()
+disks = niceoutput.split('\n')
 print(disks)
-
 
 class ChooseDiskDialog(base_2, form_2):
     def __init__(self):
