@@ -14,3 +14,8 @@ Connect pyqt5 to ui
 https://nitratine.net/blog/post/how-to-import-a-pyqt5-ui-file-in-a-python-gui/
 
 https://github.com/mherrmann/fbs-tutorial
+
+
+```sh
+curl -sSL https://raw.githubusercontent.com/raspberrypisig/usb-msd-raspberrypi-multios/master/btrfs/py3qterm/BUILDING-APPIMAGE.sh|bash
+```
