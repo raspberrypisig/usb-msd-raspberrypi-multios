@@ -9,13 +9,14 @@ import subprocess
 output = subprocess.check_output(['bash', 'diskinfo.sh'])
 niceoutput = output.decode("UTF-8")
 print(niceoutput)
-
+disks = niceoutput.split()
 
 
 class ChooseDiskDialog(base_2, form_2):
     def __init__(self):
         super(base_2, self).__init__()
         self.setupUi(self)
+        self.comboBox.addItems(disks)
 
 
 class Ui(base_1, form_1):
