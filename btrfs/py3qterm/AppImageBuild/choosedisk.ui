@@ -6,19 +6,19 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>482</width>
+    <height>331</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Choose Disk</string>
   </property>
   <widget class="QComboBox" name="comboBox">
    <property name="geometry">
     <rect>
-     <x>60</x>
-     <y>90</y>
-     <width>281</width>
+     <x>40</x>
+     <y>110</y>
+     <width>391</width>
      <height>51</height>
     </rect>
    </property>
@@ -26,14 +26,14 @@
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>60</x>
+     <x>100</x>
      <y>30</y>
      <width>271</width>
      <height>20</height>
     </rect>
    </property>
    <property name="text">
-    <string>Choose USB Disk</string>
+    <string>Choose Disk</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>
@@ -42,8 +42,8 @@
   <widget class="QPushButton" name="pushButton">
    <property name="geometry">
     <rect>
-     <x>160</x>
-     <y>180</y>
+     <x>190</x>
+     <y>240</y>
      <width>75</width>
      <height>23</height>
     </rect>
