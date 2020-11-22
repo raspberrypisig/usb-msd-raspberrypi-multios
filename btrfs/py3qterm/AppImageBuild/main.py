@@ -3,6 +3,7 @@ import sys
 
 form_1, base_1 = uic.loadUiType('mainwindow.ui')
 form_2, base_2 = uic.loadUiType('choosedisk.ui')
+form_3, base_3 = uic.loadUiType('preparedisk.ui')
 
 import subprocess
 
@@ -15,6 +16,12 @@ if len(disks) > 0:
 print(disks)
 disks = ["SELECT DISK"] + disks
 
+class PrepareDiskDialog(base_3, form_3):
+    def __init__(self):
+        super(base_3, self).__init__()
+        self.setupUi(self)
+
+
 class ChooseDiskDialog(base_2, form_2):
     def __init__(self):
         super(base_2, self).__init__()
@@ -25,6 +32,8 @@ class ChooseDiskDialog(base_2, form_2):
     def accept(self):
         if self.comboBox.currentText() != "SELECT DISK":
             super().accept()
+            dialog = PrepareDiskDialog()
+            dialog.exec_()
 
 
 class Ui(base_1, form_1):
