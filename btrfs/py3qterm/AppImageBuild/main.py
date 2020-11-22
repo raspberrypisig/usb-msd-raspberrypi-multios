@@ -16,10 +16,25 @@ if len(disks) > 0:
 print(disks)
 disks = ["SELECT DISK"] + disks
 
+
+
+
 class PrepareDiskDialog(base_3, form_3):
-    def __init__(self):
+    def __init__(self, selection):
         super(base_3, self).__init__()
         self.setupUi(self)
+        self.selection = selection
+
+    def accept(self):
+        print("accepted")
+        selectedDisk = self.selection.split(':')[0]
+        print(f"selected disk:{selectedDisk}")
+        super().accept()
+
+
+    def reject(self):
+        print("rejected")
+        super().reject()
 
 
 class ChooseDiskDialog(base_2, form_2):
@@ -30,9 +45,10 @@ class ChooseDiskDialog(base_2, form_2):
         self.pushButton.clicked.connect(self.accept)
 
     def accept(self):
-        if self.comboBox.currentText() != "SELECT DISK":
+        selection = self.comboBox.currentText()
+        if selection != "SELECT DISK":
             super().accept()
-            dialog = PrepareDiskDialog()
+            dialog = PrepareDiskDialog(selection)
             dialog.exec_()
 
 
