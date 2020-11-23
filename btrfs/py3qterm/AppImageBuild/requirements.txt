@@ -1,1 +1,3 @@
+QtPy
+py3qterm
 
