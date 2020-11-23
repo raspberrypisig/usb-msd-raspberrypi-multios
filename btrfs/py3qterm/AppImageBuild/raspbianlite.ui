@@ -6,17 +6,17 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>444</width>
-    <height>360</height>
+    <width>400</width>
+    <height>300</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Prepare Disk</string>
+   <string>Dialog</string>
   </property>
   <widget class="QDialogButtonBox" name="buttonBox">
    <property name="geometry">
     <rect>
-     <x>-50</x>
+     <x>30</x>
      <y>240</y>
      <width>341</width>
      <height>32</height>
@@ -32,73 +32,41 @@
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>60</x>
-     <y>60</y>
-     <width>381</width>
-     <height>41</height>
+     <x>20</x>
+     <y>20</y>
+     <width>361</width>
+     <height>71</height>
     </rect>
    </property>
    <property name="text">
-    <string>The USB Disk needs to be prepared with magic sauce.</string>
+    <string>Need location of  Raspbian Lite image unzipped</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
    </property>
   </widget>
-  <widget class="QLabel" name="label_2">
+  <widget class="QLineEdit" name="raspbianlocation">
    <property name="geometry">
     <rect>
-     <x>60</x>
-     <y>110</y>
-     <width>381</width>
-     <height>51</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>THIS INVOLVES DELETING THE CONTENTS OF THE DISK.</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_4">
-   <property name="geometry">
-    <rect>
-     <x>60</x>
-     <y>180</y>
-     <width>381</width>
+     <x>20</x>
+     <y>150</y>
+     <width>291</width>
      <height>21</height>
     </rect>
    </property>
-   <property name="text">
-    <string>Press OK to continue, cancel to abort</string>
-   </property>
   </widget>
-  <widget class="QWidget" name="layoutWidget">
+  <widget class="QPushButton" name="openButton">
    <property name="geometry">
     <rect>
-     <x>60</x>
-     <y>30</y>
-     <width>113</width>
-     <height>15</height>
+     <x>320</x>
+     <y>150</y>
+     <width>75</width>
+     <height>23</height>
     </rect>
    </property>
-   <layout class="QHBoxLayout" name="horizontalLayout">
-    <item>
-     <widget class="QLabel" name="label_3">
-      <property name="text">
-       <string>You chose</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QLabel" name="usbdisk">
-      <property name="font">
-       <font>
-        <weight>75</weight>
-        <bold>true</bold>
-       </font>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-     </widget>
-    </item>
-   </layout>
+   <property name="text">
+    <string>Open</string>
+   </property>
   </widget>
  </widget>
  <resources/>
