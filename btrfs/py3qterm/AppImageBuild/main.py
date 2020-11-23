@@ -4,6 +4,7 @@ import sys
 form_1, base_1 = uic.loadUiType('mainwindow.ui')
 form_2, base_2 = uic.loadUiType('choosedisk.ui')
 form_3, base_3 = uic.loadUiType('preparedisk.ui')
+form_4, base_4 = uic.loadUiType('raspbianlite.ui')
 
 import subprocess
 
@@ -17,24 +18,38 @@ print(disks)
 disks = ["SELECT DISK"] + disks
 
 
+class RaspbianLite(base_4, form_4):
+    def __init__(self):
+        super(base_4, self).__init__()
+        self.setupUi(self)
+        self.openButton.clicked.connect(self.open)
 
+    def open(self):
+        options = QtWidgets.QFileDialog.Options()
+        #options |= QtWidgets.QFileDialog.DontUseNativeDialog
+        filename, _ = QtWidgets.QFileDialog.getOpenFileName(self,"QFileDialog.getOpenFileName()", "","All Files (*);;Python Files (*.py)", options=options)
+        if filename:
+            self.raspbianlocation.setText(filename)
 
 class PrepareDiskDialog(base_3, form_3):
     def __init__(self, selection):
         super(base_3, self).__init__()
         self.setupUi(self)
         self.selection = selection
+        self.usbdisk.setText(selection)
 
     def accept(self):
         print("accepted")
         selectedDisk = self.selection.split(':')[0]
         print(f"selected disk:{selectedDisk}")
         super().accept()
+        r = RaspbianLite()
+        r.exec_()
 
 
     def reject(self):
-        print("rejected")
         super().reject()
+        sys.exit()
 
 
 class ChooseDiskDialog(base_2, form_2):
@@ -51,6 +66,10 @@ class ChooseDiskDialog(base_2, form_2):
             dialog = PrepareDiskDialog(selection)
             dialog.exec_()
 
+    def reject(self):
+        super().reject()
+        sys.exit()
+
 
 class Ui(base_1, form_1):
     def __init__(self):
@@ -62,4 +81,4 @@ class Ui(base_1, form_1):
 
 app = QtWidgets.QApplication(sys.argv)
 window = Ui()
-app.exec_()
+sys.exit(app.exec_())
