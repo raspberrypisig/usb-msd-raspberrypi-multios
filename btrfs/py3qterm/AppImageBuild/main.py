@@ -1,4 +1,4 @@
-from PyQt5 import QtWidgets, uic
+from PyQt5 import QtWidgets, uic, QtCore
 import sys
 from py3qterm import TerminalWidget
 #from py3qterm.procinfo import ProcessInfo
@@ -40,11 +40,17 @@ class TerminalWindow(QtWidgets.QTabWidget):
         #self._terms = []
         #self.tabCloseRequested[int].connect(self._on_close_request)
         #self.currentChanged[int].connect(self._on_current_changed)
-        #QTimer.singleShot(0, self.new_terminal)  # create lazy on idle
-        #self.startTimer(100)
+        QtCore.QTimer.singleShot(0, self.new_terminal)  # create lazy on idle
+        self.startTimer(100)
+
+    def new_terminal(self):
         term = TerminalWidget(self)
+        self._terms = []
+        self._terms.append(term)
+        self.addTab(term, "Terminal")
         self.setCurrentWidget(term)
         term.setFocus()
+        self.show()
 
 
 class RaspbianLite(base_4, form_4):
@@ -59,8 +65,8 @@ class RaspbianLite(base_4, form_4):
         filename, _ = QtWidgets.QFileDialog.getOpenFileName(self,"QFileDialog.getOpenFileName()", "","All Files (*);;Python Files (*.py)", options=options)
         if filename:
             self.raspbianlocation.setText(filename)
-            t = TerminalWindow()
-            t.show()
+            #t = TerminalWindow()
+            #t.show()
 
 class PrepareDiskDialog(base_3, form_3):
     def __init__(self, selection):
@@ -112,4 +118,6 @@ class Ui(base_1, form_1):
 
 app = QtWidgets.QApplication(sys.argv)
 window = Ui()
+term = TerminalWindow()
+window.setCentralWidget(term)
 sys.exit(app.exec_())
