@@ -20,13 +20,13 @@ existing=$?
 
 if [ $existing -eq 0 ];
 then
-  exit 0
+  bash main.sh $disk
 else
-  exit 1
+  bash 2.sh $disk
 fi
 
 
-bash 2.sh $disk
+
 else
 exit 1
 fi
