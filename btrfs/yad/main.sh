@@ -16,12 +16,27 @@ fi
 echo $oslist
 umount ${disk}2
 
-output="$(echo -e "$oslist" | yad --center --borders=30 --title='Pi-Apps' --width=600 --height=400 --no-headers --buttons-layout=center  \
-        --text="\nPlease select drive to make into a multiboot Pi disk\n" --text-align=center  \
+output="$(echo -e "$oslist" | yad --center --borders=10 --title='MultiPi4' --width=600 --height=400 --no-headers --buttons-layout=center  \
+        --text="\nInstalled OS List\n" --text-align=center  \
         --list --separator='\n'  \
         --column=:Name --print-column=1 \
-        --button=Select:0 \
-        --button=Cancel:1 \
+        --button="Add OS:0" \
+        --button="Move Up:1" \
+        --button="Move Down:2" \
         )"
 
+button=$?
 
+case $button in 
+0)
+bash addos.sh $disk
+;;
+
+1)
+bash moveup.sh $output
+;;
+2)
+bash movedown.sh $output
+;;
+
+esac
