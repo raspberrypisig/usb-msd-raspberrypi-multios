@@ -1,1 +1,2 @@
 
+pkexec env DISPLAY=$DISPLAY XAUTHORITY=$XAUTHORITY <program>
