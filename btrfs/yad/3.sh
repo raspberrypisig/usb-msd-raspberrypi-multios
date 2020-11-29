@@ -8,7 +8,17 @@ buttonpressed=$?
 if [ $buttonpressed -eq 0 ];
 then
 raspbianimg=$(echo $output|sed  's/|//')
-./multipi4-preparedisk "$raspbianimg" "$disk"
+gnome-terminal --wait -- bash ./multipi4-preparedisk "$raspbianimg" "$disk"
+status=$?
+if [ $status -eq 0 ];
+then
+  echo "Finished."
+else
+  echo "Something went wrong."
+fi
+
+
+
 else
 exit 1
 fi
