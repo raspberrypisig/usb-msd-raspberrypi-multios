@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-
+set -x
 #LIST="one\ntwo\nthree"
 # echo -e "$LIST"
 output="$(bash diskinfo.sh | yad --center --borders=30 --title='Pi-Apps' --width=600 --height=400 --no-headers --buttons-layout=center  \
@@ -15,6 +15,17 @@ if [ $buttonpressed -eq 0  ];
 then
 #echo $output
 disk=$(echo $output | cut -f1 -d':')
+bash existingmultipi4.sh $disk
+existing=$?
+
+if [ $existing -eq 0 ];
+then
+  exit 0
+else
+  exit 1
+fi
+
+
 bash 2.sh $disk
 else
 exit 1
