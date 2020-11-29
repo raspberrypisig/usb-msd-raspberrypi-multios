@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-
+set -x
 disk="$1"
 
 partitions=$(fdisk -l  $disk | sed -n '/Type/,$p'|sed -n '2,$p'|awk '{print $1}')
@@ -13,7 +13,7 @@ then
 exit 1
 fi
 
-partitiontypes=$(blkid|grep /dev/sdd|awk '{print $3}'|sed -r 's/TYPE=\"(.*)\"/\1/')
+partitiontypes=$(blkid|grep $disk|sed -r 's/.*TYPE="([^"]*)(.*)/\1/')
 readarray -t parray <<<$partitiontypes
 #declare -p parray
 
