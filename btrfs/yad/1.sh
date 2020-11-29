@@ -9,6 +9,13 @@ output="$(bash diskinfo.sh | yad --center --borders=30 --title='Pi-Apps' --width
         --button=Select:0 \
         --button=Cancel:1 \
         )"
+
 buttonpressed=$?
-echo $buttonpressed
-echo $output
+if [ $buttonpressed -eq 0  ];
+then
+#echo $output
+disk=$(echo $output | cut -f1 -d':')
+bash 2.sh $disk
+else
+exit 1
+fi
