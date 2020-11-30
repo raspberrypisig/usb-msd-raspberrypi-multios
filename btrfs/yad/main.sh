@@ -38,5 +38,7 @@ bash moveup.sh $output
 2)
 bash movedown.sh $output
 ;;
-
+252)
+exit 1
+;;
 esac
