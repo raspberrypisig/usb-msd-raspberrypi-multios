@@ -2,7 +2,8 @@
 set -x
 disk="$1"
 
-output=$(yad --text "Raspbian Image eg.2020-raspbian.img" --text-align=center --form --field="Raspbian Image:SFL")
+output=$(yad --center --borders=15 --text "Raspbian Lite is needed for preparing multiboot Pi.\n Raspbian Lite image is usually named something like\n2020-08-20-raspios-buster-armhf-lite.img" \
+       --text-align=center --form --field="Raspbian Image:SFL")
 buttonpressed=$?
 
 if [ $buttonpressed -eq 0 ];
@@ -17,7 +18,7 @@ else
   echo "Something went wrong."
 fi
 
-
+bash addos.sh $disk
 
 else
 exit 1
