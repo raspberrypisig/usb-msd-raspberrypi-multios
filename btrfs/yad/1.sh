@@ -2,6 +2,7 @@
 set -x
 #LIST="one\ntwo\nthree"
 # echo -e "$LIST"
+#echo $OLDPWD
 output="$(bash diskinfo.sh | yad --center --borders=30 --title='Pi-Apps' --width=600 --height=400 --no-headers --buttons-layout=center  \
         --text="\nPlease select drive to make into a multiboot Pi disk\n" --text-align=center  \
         --list --separator='\n'  \

@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+dirname=$PWD
+pkexec env DISPLAY=$DISPLAY XAUTHORITY=$XAUTHORITY OLDPWD=$PWD $PWD/1.sh
