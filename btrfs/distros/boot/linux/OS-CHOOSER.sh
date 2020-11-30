@@ -55,7 +55,7 @@ fi
 
 mkdir -p $TEMP_DIR/$volname
 
-if [ $BTRFS_DIR/@${volname}/boot/firmware ];
+if [ -d $BTRFS_DIR/@${volname}/boot/firmware ];
 then
 cp -r $BTRFS_DIR/@${volname}/boot/firmware/* $TEMP_DIR/$volname
 else
