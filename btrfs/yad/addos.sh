@@ -31,7 +31,7 @@ image=$(echo $output | cut -f3 -d'|')
 #echo $basedistro
 #echo $image
 #bash multipi4 "$basedistro" "$image" "$disk" "$name" 
-echo gnome-terminal --wait -- bash ./multipi4 ${ary["$basedistro"]} "$image" "$disk" "$name"
+gnome-terminal --wait -- bash ./multipi4 ${ary["$basedistro"]} "$image" "$disk" "$name"
 status=$?
 if [ $status -eq 0 ];
 then
