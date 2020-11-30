@@ -2,6 +2,12 @@ set -x
 
 disk="$1"
 
+declare -A ary
+
+while IFS== read -r key value; do
+    ary["$key"]="$value"
+done < basedistros.txt
+
 output="$(yad --width=600 --center --height=400 --buttons-layout=center --title="Multipi4 - Add OS" --text="Add OS" \
 --image="/usr/share/icons/Tango/scalable/emotes/face-smile.svg" \
 --form  \
@@ -21,11 +27,11 @@ then
 name=$(echo $output | cut -f1 -d'|')
 basedistro=$(echo $output | cut -f2 -d'|')
 image=$(echo $output | cut -f3 -d'|')
-echo $name
-echo $basedistro
-echo $image
+#echo $name
+#echo $basedistro
+#echo $image
 #bash multipi4 "$basedistro" "$image" "$disk" "$name" 
-gnome-terminal --wait -- bash ./multipi4 "$basedistro" "$image" "$disk" "$name"
+echo gnome-terminal --wait -- bash ./multipi4 ${ary["$basedistro"]} "$image" "$disk" "$name"
 status=$?
 if [ $status -eq 0 ];
 then
@@ -40,4 +46,3 @@ bash main.sh $disk
 else
 exit 1
 fi
-
