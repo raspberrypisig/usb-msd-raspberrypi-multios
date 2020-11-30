@@ -18,7 +18,7 @@ else
   echo "Something went wrong."
 fi
 
-bash addos.sh $disk
+bash main.sh $disk
 
 else
 exit 1
