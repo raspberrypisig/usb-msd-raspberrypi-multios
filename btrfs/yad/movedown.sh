@@ -6,19 +6,21 @@ mount ${disk}2 /tmp/multipi4/distros
 
 selectedos=$(cat /tmp/multipi4.selection)
 oslistfile=/tmp/multipi4/distros/oslist.txt
-#cat $oslistfile
 
 linenumber=$(grep -n "$selectedos" $oslistfile | cut -f1 -d':')
+linecount=$(cat $oslistfile| wc -l)
 
-if [ $linenumber -eq 1 ];
+
+if [ $linenumber -eq $linecount ];
 then
 umount ${disk}2
 exit 0
 fi
 
+
 echo -e "\f" > /tmp/multipi4.fifo 
 
-newlist=$(awk "!/$selectedos/ { if (NR > 1) print prev; prev=\$0} /$selectedos/ {print \$0;} END {print prev}" < /tmp/multipi4/distros/oslist.txt)
+newlist=$(sed -n "/$selectedos/{h;n;p;g};p" /tmp/multipi4/distros/oslist.txt)
 echo $newlist
 num=$(echo $newlist|wc -l)
 echo $num
