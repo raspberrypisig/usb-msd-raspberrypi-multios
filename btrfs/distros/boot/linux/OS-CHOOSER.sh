@@ -10,6 +10,7 @@ createsubvolumename() {
   name="$1"
   typeset -l newvolname
   newvolname=${name// /_}
+  newvolname=${newvolname//./__}
   echo $newvolname  
 }
 
