@@ -2,8 +2,11 @@
 set -x
 disk="$1"
 
+
+
 pipefile=/tmp/multipi4.fifo
 selectedos=/tmp/multipi4.selection
+fd=4
 
 rm -f $pipefile
 rm -f $selectedos
@@ -28,31 +31,17 @@ fi
 
 echo $oslist
 umount ${disk}2
+echo -e "\f" > $pipefile &
+sleep 1
+echo -e "$oslist" > $pipefile &
 
 output="$(yad --center --borders=10 --title='MultiPi4' --width=600 --height=400 --no-headers --buttons-layout=center --kill-parent  \
         --text="\nInstalled OS List\n" --text-align=center  \
         --list --separator='\n'  \
         --column=:Name --print-column=1 \
         --select-action="/bin/sh -c \"printf \%\s'\n' %s > $selectedos \"" \
-        --button="Add OS:0" \
+        --button="Add OS:bash addos.sh $disk" \
         --button="Move Up:bash moveup.sh $disk" \
         --button="Move Down:bash movedown.sh $disk" \
         <&4 )"
-echo $output
-button=$?
-exit 0
-case $button in 
-0)
-bash addos.sh $disk
-;;
 
-1)
-bash moveup.sh $output
-;;
-2)
-bash movedown.sh $output
-;;
-252)
-exit 0
-;;
-esac
