@@ -23,10 +23,10 @@ then
 oslist=
 else
 oslist=$(cat /tmp/multipi4/distros/oslist.txt)
-echo -e  "$oslist" > $pipefile &
-exec 4<> $pipefile
 fi
 
+
+exec 4<> $pipefile
 
 
 echo $oslist
@@ -35,6 +35,7 @@ echo -e "\f" > $pipefile &
 sleep 1
 echo -e "$oslist" > $pipefile &
 
+
 output="$(yad --center --borders=10 --title='MultiPi4' --width=600 --height=400 --no-headers --buttons-layout=center --kill-parent  \
         --text="\nInstalled OS List\n" --text-align=center  \
         --list --separator='\n'  \
@@ -42,6 +43,5 @@ output="$(yad --center --borders=10 --title='MultiPi4' --width=600 --height=400 
         --select-action="/bin/sh -c \"printf \%\s'\n' %s > $selectedos \"" \
         --button="Add OS:bash addos.sh $disk" \
         --button="Move Up:bash moveup.sh $disk" \
-        --button="Move Down:bash movedown.sh $disk" \
-        <&4 )"
+        --button="Move Down:bash movedown.sh $disk" <&4 ) "
 
