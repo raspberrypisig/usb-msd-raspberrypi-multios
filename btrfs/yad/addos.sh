@@ -7,7 +7,7 @@ declare -A ary
 basedistros=
 
 while IFS== read -r key value; do
-  #ary["$key"]="$value"
+  ary["$key"]="$value"
   basedistros+="${key}\!"
 done < basedistros.txt
 
