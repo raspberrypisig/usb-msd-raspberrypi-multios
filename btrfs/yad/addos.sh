@@ -41,8 +41,14 @@ else
   echo "Something went wrong."
 fi
 
-#bash main.sh $disk
-
+pipefile=/tmp/multip4.fifo
+echo -e "\f" > $pipefile
+mount ${disk}2 /tmp/multipi4/distros
+oslist=$(cat /tmp/multipi4/distros/oslist.txt)
+umount ${disk}2
+sleep 1
+echo -e "$oslist" > $pipefile &
+exit 0
 else
 exit 1
 fi

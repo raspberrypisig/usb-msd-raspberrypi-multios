@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
 
-#set -x
+set -x
+usb=$(ls /dev/disk/by-id/usb* 2>/dev/null)
+ata=$(ls /dev/disk/by-id/ata* 2>/dev/null)
 
-usbdevices=$(readlink -f /dev/disk/by-id/{usb*,ata*}|sed -r  '/[0-9]+/d'|sort)
+usbdevices=$(readlink -m -f $usb $ata|sed -r  '/[0-9]+/d'|sort)
 
 for usbdisk in $usbdevices
 do
