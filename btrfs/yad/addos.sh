@@ -47,7 +47,7 @@ else
 fi
 
 pipefile=/tmp/multip4.fifo
-echo -e "\f" > $pipefile
+echo -e "\f" > $pipefile &
 mkdir -p /tmp/multipi4/distros
 mount ${disk}2 /tmp/multipi4/distros
 oslist=$(cat /tmp/multipi4/distros/oslist.txt)
