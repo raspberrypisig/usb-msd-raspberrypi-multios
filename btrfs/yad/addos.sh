@@ -4,16 +4,21 @@ disk="$1"
 
 declare -A ary
 
+basedistros=
+
 while IFS== read -r key value; do
-    ary["$key"]="$value"
+  #ary["$key"]="$value"
+  basedistros+="${key}\!"
 done < basedistros.txt
+
+basedistros=${basedistros::-1}
 
 output="$(yad --width=600 --center --height=400 --buttons-layout=center --title="Multipi4 - Add OS" --text="Add OS" \
 --image="/usr/share/icons/Tango/scalable/emotes/face-smile.svg" \
 --form  \
 --field=Name "" \
 --field="Base distro":CB \
-"Raspberry Pi OS\!Ubuntu" \
+"$basedistros" \
 --field="Image(*.img)":SFL  \
 --button="OK:0" \
 --button="Cancel:1" \
