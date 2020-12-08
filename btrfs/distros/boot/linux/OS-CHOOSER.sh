@@ -37,7 +37,7 @@ find $TEMP_DIR -mindepth 1 -type d -exec rm -rf '{}' \;
 
 mkdir $TEMP_DIR/$volname
 mkdir -p $BTRFS_DIR
-mount ${USB_DISK}3 $BTRFS_DIR
+mount -o ro ${USB_DISK}3 $BTRFS_DIR
 
 if [ -d $BTRFS_DIR/@${volname}/boot/firmware ];
 then
