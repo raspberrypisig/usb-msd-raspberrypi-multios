@@ -74,7 +74,7 @@ then
   
   rsync -a "$linuxdir/" usb3/$volname
   runcontainer $setupscript usb3/${volname} $volname
-  echo $name >> usb2/oslist.txt
+  echo -e "\n$name" >> usb2/oslist.txt
   umount {p1,p2,usb2,usb3}
   rm -rf {p1,p2,usb2,usb3}
   losetup -D $loop
