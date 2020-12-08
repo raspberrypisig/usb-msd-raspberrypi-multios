@@ -52,9 +52,8 @@ mkdir -p /tmp/multipi4/distros
 mount ${disk}2 /tmp/multipi4/distros
 oslist=$(cat /tmp/multipi4/distros/oslist.txt)
 umount ${disk}2
-sleep 1
 echo -e "$oslist" > $pipefile &
-sleep 1
+sleep 10
 exit 0
 else
 exit 1
