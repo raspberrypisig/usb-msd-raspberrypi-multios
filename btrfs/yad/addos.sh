@@ -54,6 +54,7 @@ oslist=$(cat /tmp/multipi4/distros/oslist.txt)
 umount ${disk}2
 sleep 1
 echo -e "$oslist" > $pipefile &
+sleep 1
 exit 0
 else
 exit 1
