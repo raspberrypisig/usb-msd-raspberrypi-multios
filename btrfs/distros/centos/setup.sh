@@ -10,12 +10,16 @@ volname="$1"
 #echo btrfs >> /etc/initramfs-tools/modules
 
 VERSION=$(find /lib/modules -name *.el8 -exec basename {} \; )
-#mkinitramfs -o /boot/initramfs-btrfs -v $VERSION
-dracut --add-drivers btrfs /boot/initrd.img $VERSION
+dnf update
+dnf install -y btrfs-progs
+echo btrfs >> /etc/dracut.conf
+dracut /boot/initrd.img $VERSION
 
 
 sed -i "s/PLACEHOLDER/$volname/" /boot/cmdline.txt 
 sed -i "s/PLACEHOLDER/$volname/" /etc/fstab
+
+systemctl disable sssd
 
 # Disable kernel updates
 #sudo apt-mark hold libraspberrypi-bin libraspberrypi-dev libraspberrypi-doc libraspberrypi0
