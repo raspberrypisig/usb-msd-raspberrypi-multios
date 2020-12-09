@@ -10,7 +10,8 @@ volname="$1"
 #echo btrfs >> /etc/initramfs-tools/modules
 
 VERSION=$(find /lib/modules -name *.el8 -exec basename {} \; )
-dnf update
+echo -e "\nexclude=kernel*\n" >> /etc/dnf/dnf.conf
+dnf -y update
 dnf install -y btrfs-progs
 echo btrfs >> /etc/dracut.conf
 dracut /boot/initrd.img $VERSION
