@@ -11,9 +11,9 @@ volname="$1"
 
 VERSION=$(find /lib/modules -name *.el8 -exec basename {} \; )
 echo -e "\nexclude=kernel*\n" >> /etc/dnf/dnf.conf
-dnf -y update
-dnf install -y btrfs-progs
-echo btrfs >> /etc/dracut.conf
+#dnf -y update
+#dnf install -y btrfs-progs
+#echo btrfs >> /etc/dracut.conf
 dracut /boot/initrd.img $VERSION
 
 
