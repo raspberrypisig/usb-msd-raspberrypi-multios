@@ -14,7 +14,7 @@ echo -e "\nexclude=kernel*\n" >> /etc/dnf/dnf.conf
 #dnf -y update
 #dnf install -y btrfs-progs
 #echo btrfs >> /etc/dracut.conf
-dracut /boot/initrd.img $VERSION
+dracut --add btrfs /boot/initrd.img $VERSION
 
 
 sed -i "s/PLACEHOLDER/$volname/" /boot/cmdline.txt 
