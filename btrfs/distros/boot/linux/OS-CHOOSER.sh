@@ -46,8 +46,8 @@ else
 cp "$BTRFS_DIR/@${volname}/boot/config.txt" $TEMP_DIR 
 fi
 
-echo "os_prefix=${volname}/" >> $TEMP_DIR/config.txt
-echo "dtparam=sd_poll_once=on" >> $TEMP_DIR/config.txt
+echo -e "\nos_prefix=${volname}/" >> $TEMP_DIR/config.txt
+echo -e "\ndtparam=sd_poll_once=on\n" >> $TEMP_DIR/config.txt
 
 if [ -d $TEMP_DIR/$volname ];
 then
