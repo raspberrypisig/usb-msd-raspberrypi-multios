@@ -22,6 +22,8 @@ sed -i "s/PLACEHOLDER/$volname/" /etc/fstab
 
 systemctl disable sssd
 
+
+
 # Disable kernel updates
 #sudo apt-mark hold libraspberrypi-bin libraspberrypi-dev libraspberrypi-doc libraspberrypi0
 #sudo apt-mark hold raspberrypi-bootloader raspberrypi-kernel raspberrypi-kernel-headers

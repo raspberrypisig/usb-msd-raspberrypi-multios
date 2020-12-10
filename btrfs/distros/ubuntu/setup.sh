@@ -12,6 +12,7 @@ volname="$1"
 echo btrfs >> /etc/initramfs-tools/modules
 
 VERSION=$(find /lib/modules -name '*-raspi' -exec basename {} \; )
+echo "RESUME=none" > /etc/initramfs-tools/conf.d/resume
 update-initramfs -c -k $VERSION
 cp /boot/initrd.img-$VERSION /boot/firmware/initrd.img
 
@@ -21,3 +22,7 @@ sed -i "s/PLACEHOLDER/$volname/" /etc/fstab
 #mv /etc/resolv.conf.old /etc/resolv.conf
 
 apt-mark hold linux-headers-$VERSION linux-modules-$VERSION linux-image-$VERSION
+
+echo -e "ubuntu\nubuntu\n" | passwd ubuntu
+
+apt install -y network-manager
