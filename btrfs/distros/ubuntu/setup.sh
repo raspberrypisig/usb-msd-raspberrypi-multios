@@ -9,6 +9,8 @@ volname="$1"
 #apt update
 #apt install -y initramfs-tools btrfs-progs
 
+touch /etc/cloud/cloud-init.disabled
+
 echo btrfs >> /etc/initramfs-tools/modules
 
 VERSION=$(find /lib/modules -name '*-raspi' -exec basename {} \; )
@@ -20,6 +22,8 @@ sed -i "s/PLACEHOLDER/$volname/" /boot/firmware/cmdline.txt
 sed -i "s/PLACEHOLDER/$volname/" /etc/fstab
 
 #mv /etc/resolv.conf.old /etc/resolv.conf
+
+systemctl disable sssd
 
 apt-mark hold linux-headers-$VERSION linux-modules-$VERSION linux-image-$VERSION
 
