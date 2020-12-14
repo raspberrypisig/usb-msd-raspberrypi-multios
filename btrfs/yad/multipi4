@@ -58,10 +58,18 @@ then
   volname=$(createsubvolumename "$name")
   btrfs subvolume create $volname
   cd ..
+  
+  if [ -f ${distrodir}/copy.sh ];
+  then
+    ${distrodir}/copy.sh $diskimage usb3/${volname} $volname
+  else  
+
   loop=$(losetup --show -Pf $diskimage)
   mount -o ro ${loop}p1 p1 
   mount -o ro ${loop}p2 p2
   rsync -a p2/ usb3/${volname}
+  
+  fi
   
   if [ -d usb3/${volname}/boot/firmware ];
   then
@@ -73,11 +81,18 @@ then
   fi
   
   rsync -a "$linuxdir/" usb3/$volname
+
+  
+
   runcontainer $setupscript usb3/${volname} $volname
   echo "$name" >> usb2/oslist.txt
+  if [ ! -f ${distrodir}/copy.sh ];
+  then
   umount {p1,p2,usb2,usb3}
   rm -rf {p1,p2,usb2,usb3}
   losetup -D $loop
+  fi  
+
 fi
 
 rm -rf multios
