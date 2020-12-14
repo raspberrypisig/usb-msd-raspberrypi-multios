@@ -47,7 +47,7 @@ else
 fi
 
 pipefile=/tmp/multip4.fifo
-echo -e "\f" > $pipefile &
+#echo -e "\f" > $pipefile &
 mkdir -p /tmp/multipi4/distros
 mount ${disk}2 /tmp/multipi4/distros
 oslist=$(cat /tmp/multipi4/distros/oslist.txt)
@@ -56,7 +56,7 @@ umount ${disk}2
 echo -e "\f" > /tmp/multipi4.fifo
 echo -e "$oslist" > /tmp/multipi4.fifo
 )
-sleep 1
+sleep 120
 exit 0
 else
 exit 1

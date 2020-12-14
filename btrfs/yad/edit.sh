@@ -41,3 +41,4 @@ then
   umount ${disk}2
   umount ${disk}3
 fi
+sleep 120
