@@ -19,8 +19,8 @@ mount ${disk}2 /tmp/multipi4/deleting2
 mount ${disk}3 /tmp/multipi4/deleting3
 vol=$(createsubvolumename "$selectedos") 
 rm -rf /tmp/multipi4/deleting3/$vol
-oslist=$(sed "/$selectedos/d" /tmp/multipi4/deleting2/oslist.txt)
-sed -i "/$selectedos/d" /tmp/multipi4/deleting2/oslist.txt
+oslist=$(sed "/^$selectedos\$/d" /tmp/multipi4/deleting2/oslist.txt)
+sed -i "/^$selectedos\$/d" /tmp/multipi4/deleting2/oslist.txt
 (
 echo -e "\f" > /tmp/multipi4.fifo
 echo -e "$oslist" > /tmp/multipi4.fifo
