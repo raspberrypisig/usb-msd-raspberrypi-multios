@@ -56,7 +56,8 @@ umount ${disk}2
 echo -e "\f" > /tmp/multipi4.fifo
 echo -e "$oslist" > /tmp/multipi4.fifo
 )
-sleep 120
+echo [info] Sleep for 20 seconds
+sleep 20
 exit 0
 else
 exit 1

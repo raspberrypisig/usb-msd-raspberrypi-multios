@@ -13,32 +13,9 @@ output="$(yad --center --borders=10 \
 
 buttonpressed=$?
 
-createsubvolumename() {
-  name="$1"
-  typeset -l newvolname
-  newvolname=${name// /_}
-  newvolname=${newvolname//./__}
-  echo @$newvolname  
-}
-
 if [ $buttonpressed -eq 1 ];
 then
-  echo $selectedos
-  echo $disk
-  mkdir -p /tmp/multipi4/deleting3
-  mkdir -p /tmp/multipi4/deleting2
-  mount ${disk}2 /tmp/multipi4/deleting2
-  mount ${disk}3 /tmp/multipi4/deleting3
-  vol=$(createsubvolumename "$selectedos") 
-  rm -rf /tmp/multipi4/deleting3/$vol
-  oslist=$(sed "/$selectedos/d" /tmp/multipi4/deleting2/oslist.txt)
-  sed -i "/$selectedos/d" /tmp/multipi4/deleting2/oslist.txt
-  (
-   echo -e "\f" > /tmp/multipi4.fifo
-   echo -e "$oslist" > /tmp/multipi4.fifo
-  )
-  sleep 2
-  umount ${disk}2
-  umount ${disk}3
+gnome-terminal --wait -- bash ./delete.sh "$disk" "$selectedos"
 fi
-sleep 120
+echo "sleep for 20 seconds"
+sleep 20

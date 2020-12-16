@@ -96,4 +96,5 @@ then
 fi
 
 rm -rf multios
-sleep 60
+echo Sleep for 20 seconds
+sleep 20

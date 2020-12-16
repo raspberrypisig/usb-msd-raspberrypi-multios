@@ -66,6 +66,7 @@ fi
 
 umount $BTRFS_DIR
 umount $TEMP_DIR
+sync
 rm -rf $BTRFS_DIR
 rm -rf $TEMP_DIR
 reboot 2
