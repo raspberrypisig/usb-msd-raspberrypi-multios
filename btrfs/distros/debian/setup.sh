@@ -10,7 +10,7 @@ VERSION=$(find /lib/modules -name *-arm64 -exec basename {} \; )
 
 apt-mark hold linux-image-$VERSION
 apt update
-apt install -y task-kde-desktop
+DEBIAN_FRONTEND=noninteractive apt install -y task-kde-desktop
 
 
 
