@@ -6,9 +6,12 @@ volname="$1"
 sed -i "s/PLACEHOLDER/$volname/" /boot/firmware/cmdline.txt 
 sed -i "s/PLACEHOLDER/$volname/" /etc/fstab
 
-# Disable kernel updates
-apt-mark hold libraspberrypi-bin libraspberrypi-dev libraspberrypi-doc libraspberrypi0
-apt-mark hold raspberrypi-bootloader raspberrypi-kernel raspberrypi-kernel-headers
+VERSION=$(find /lib/modules -name *arm64 -exec basename {} \; )
 
-systemctl disable resize2fs_once
-systemctl disable dphys-swapfile
+apt-mark hold linux-image-$VERSION
+apt update
+apt install -y task-kde-desktop
+
+
+
+
