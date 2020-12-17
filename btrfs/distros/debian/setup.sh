@@ -6,7 +6,7 @@ volname="$1"
 sed -i "s/PLACEHOLDER/$volname/" /boot/firmware/cmdline.txt 
 sed -i "s/PLACEHOLDER/$volname/" /etc/fstab
 
-VERSION=$(find /lib/modules -name *arm64 -exec basename {} \; )
+VERSION=$(find /lib/modules -name *-arm64 -exec basename {} \; )
 
 apt-mark hold linux-image-$VERSION
 apt update
