@@ -10,7 +10,8 @@ VERSION=$(find /lib/modules -name *-arm64 -exec basename {} \; )
 
 apt-mark hold linux-image-$VERSION
 apt update
-DEBIAN_FRONTEND=noninteractive apt install -y task-kde-desktop
+apt install -y network-manager apparmor
+#DEBIAN_FRONTEND=noninteractive apt install -y task-kde-desktop
 
 
 
