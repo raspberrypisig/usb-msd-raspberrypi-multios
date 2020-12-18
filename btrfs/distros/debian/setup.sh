@@ -31,6 +31,9 @@ unmanaged-devices=type:bridge;type:tun;type:veth
 backend=journal
 EOF
 
+systemctl disable dhcpcd
+systemctl disable ModemManager
+
 
 
 
