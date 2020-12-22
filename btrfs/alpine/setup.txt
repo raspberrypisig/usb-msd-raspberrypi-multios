@@ -1,0 +1,56 @@
+# Need to create APKINDEX.tar.gz file
+
+-----miniroot
+     --- root
+         <This is where we will be building APKINDEX.tar.gz and fetching packages  bash and newt and 
+         dependent packages>
+
+----rpi
+    ---- apks
+         ------- aarch64
+             <This is where the old APKINDEX.tar.gz that we want to replace lives, along with the 
+              existing apks.>
+
+Following https://wiki.alpinelinux.org/wiki/Apkindex_format
+
+wget -O alpine-rpi.tar.gz -c https://dl-cdn.alpinelinux.org/alpine/v3.12/releases/aarch64/alpine-rpi-3.12.3-aarch64.tar.gz
+wget -O alpine-miniroot.tar.gz -c https://dl-cdn.alpinelinux.org/alpine/v3.12/releases/aarch64/alpine-minirootfs-3.12.3-aarch64.tar.gz
+mkdir -p miniroot rpi
+tar xvzf alpine-rpi.tar.gz -C rpi
+tar xvzf alpine-miniroot.tar.gz -C miniroot
+
+#cp -v rpi/apks/aarch64/*.apk miniroot/root
+systemd-nspawn -D miniroot
+# Run in chroot
+apk update
+apk fetch -R bash newt
+apk index -o APKINDEX.unsigned.tar.gz *.apk
+#apk add abuild
+#abuild-keygen -a -i -n
+#privatekey=$(find /root/.abuild/*.rsa)
+#publickey=$(find /root/.abuild/*.rsa.pub)
+#openssl dgst -sha1 -sign $privatekey -out .SIGN.RSA.$(basename $publickey) APKINDEX.unsigned.tar.gz
+#tar -c .SIGN.RSA.$(basename $publickey) | abuild-tar --cut | gzip -9 > signature.tar.gz
+#cat signature.tar.gz APKINDEX.unsigned.tar.gz > APKINDEX.tar.gz
+#abuild-sign -k $privatekey APKINDEX.tar.gz
+exit
+#exit chroot
+
+
+cp -v miniroot/root/*.apk rpi/apks/aarch64
+#cp -v miniroot/root/APKINDEX.tar.gz rpi/apks/aarch64
+# Needs to be put in the initramfs
+#unmkinitramfs rpi/boot/initramfs-rpi initramfs-rpi
+mkdir initramfs-rpi4
+gzip -dc rpi/boot/initramfs-rpi4 | cpio -id -D initramfs-rpi4
+#publickey=$(find miniroot/root/.abuild/*.rsa.pub)
+#cp -v $publickey initramfs-rpi4/etc/apk/keys
+cd initramfs-rpi4
+
+find . | sort | cpio --quiet -o -H newc | gzip -9 > ../rpi/boot/initramfs-rpi4
+
+cat<<EOF > /etc/init.d/firstboot
+cd /media/sda1/apks
+apk add --force-non-repository --allow-untrusted ./popt-*.apk ./pcre-*.apk ./readline-*.apk ./slang-*.apk ./bash-*.apk ./newt-*.apk
+EOF
+
