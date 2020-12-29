@@ -2,7 +2,7 @@
 set -x
 cd /root
 apk update
-apk add gcc linux-headers
+apk add gcc linux-headers alpine-sdk
 apk fetch -R bash newt
 gcc -static -o /rebootp /rebootp.c
 

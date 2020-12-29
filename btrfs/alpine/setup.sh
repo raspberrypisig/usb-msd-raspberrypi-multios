@@ -15,7 +15,7 @@ tar xvzf alpine-miniroot.tar.gz -C miniroot
 rm alpine-rpi.tar.gz
 rm alpine-miniroot.tar.gz
 
-cp container.sh miniroot
+cp container.sh rebootp.c miniroot
 systemd-nspawn -D miniroot /container.sh
 rm miniroot/container.sh
 cp -v miniroot/root/*.apk rpi/apks/aarch64
