@@ -4,7 +4,7 @@ set -x
 TEMP_BOOT=/tmp/multipi4/alpine
 rm -rf $TEMP_BOOT
 mkdir -p $TEMP_BOOT
-cp localhost.apkovl.tar.gz container.sh $TEMP_BOOT
+cp localhost.apkovl.tar.gz container.sh rebootp.c $TEMP_BOOT
 cd $TEMP_BOOT
 
 wget -O alpine-rpi.tar.gz -c https://dl-cdn.alpinelinux.org/alpine/v3.12/releases/aarch64/alpine-rpi-3.12.3-aarch64.tar.gz
