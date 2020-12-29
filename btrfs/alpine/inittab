@@ -1,4 +1,4 @@
-# /etc/inittab
+# This file lives in /etc/inittab inside localhost.apkovl.tar.gz
 
 ::sysinit:/sbin/openrc sysinit
 ::sysinit:/sbin/openrc boot

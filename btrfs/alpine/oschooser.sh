@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# This file lives in /etc/local.d/oschooser.sh inside localhost.apkovl.tar.gz
+
 set -x
 
 TEMP_DIR=/tmp/usb2
