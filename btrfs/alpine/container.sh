@@ -1,4 +1,5 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
+set -x
 cd /root
 apk update
-apk fetch -R bash newt
+apk fetch -R bash newt sfdisk

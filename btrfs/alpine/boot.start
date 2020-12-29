@@ -1,0 +1,8 @@
+#!/bin/ash
+
+# This file should be in /etc/local.d and would be started with 
+  rc-service add local default
+
+cd /media/usb/apks/aarch64
+apk add --force-non-repository --allow-untrusted ./popt-*apk ./pcre-*.apk ./ncurses-*.apk ./readline-*.apk ./slang-*.apk ./bash-*.apk ./newt-*.apk
+bash
