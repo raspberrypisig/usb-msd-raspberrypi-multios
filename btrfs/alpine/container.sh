@@ -2,6 +2,7 @@
 set -x
 cd /root
 apk update
-apk fetch -R bash newt findmnt
+apk add gcc linux-headers
+apk fetch -R bash newt
 gcc -static -o /rebootp /rebootp.c
 
