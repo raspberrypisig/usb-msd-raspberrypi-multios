@@ -36,6 +36,9 @@ CHOICE=$(whiptail --title "Choose OS" --menu " "  --nocancel --noitem   20 70 5 
 volname=$(createsubvolumename "$CHOICE")
 echo $volname
 
+umount /dev/sda2
+mount -o rw /dev/sda2 /media/sda2
+
 find $TEMP_DIR -mindepth 1 -type d -exec rm -rf '{}' \;
 
 mkdir $TEMP_DIR/$volname
@@ -68,8 +71,8 @@ fi
 
 
 umount $BTRFS_DIR
-#umount $TEMP_DIR
+umount $TEMP_DIR
 sync
 rm -rf $BTRFS_DIR
-rm -rf $TEMP_DIR
+#rm -rf $TEMP_DIR
 /etc/local.d/rebootp.bin 2
