@@ -4,7 +4,8 @@
 
 set -x
 
-TEMP_DIR=/tmp/usb2
+#TEMP_DIR=/tmp/usb2
+TEMP_DIR=/media/sda2
 USB_DISK=/dev/sda
 BTRFS_DIR=/tmp/usb3
 
@@ -16,8 +17,8 @@ createsubvolumename() {
   echo $newvolname  
 }
 
-mkdir -p $TEMP_DIR
-mount ${USB_DISK}2 $TEMP_DIR
+#mkdir -p $TEMP_DIR
+#mount ${USB_DISK}2 $TEMP_DIR
 options=()
 
 if [ -f $TEMP_DIR/oslist.txt ];
@@ -67,8 +68,8 @@ fi
 
 
 umount $BTRFS_DIR
-umount $TEMP_DIR
+#umount $TEMP_DIR
 sync
 rm -rf $BTRFS_DIR
 rm -rf $TEMP_DIR
-reboot 2
+/etc/local.d/rebootp.bin 2
