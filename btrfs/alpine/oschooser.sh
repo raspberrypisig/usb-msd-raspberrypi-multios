@@ -4,10 +4,22 @@
 
 set -x
 
-#TEMP_DIR=/tmp/usb2
-TEMP_DIR=/media/sda2
+TEMP_DIR=$(grep /dev/sda2 /etc/mtab|cut -f2 -d' ')
+#TEMP_DIR=/media/usb
+#TEMP_DIR=/media/sda2
 USB_DISK=/dev/sda
 BTRFS_DIR=/tmp/usb3
+
+if [ -z $TEMP_DIR ];
+then
+  TEMP_DIR=/media/sda2
+  mkdir -p $TEMP_DIR
+  mount /dev/sda2 $TEMP_DIR
+fi
+
+#ls /media
+#sleep 60
+
 
 createsubvolumename() {
   name="$1"
@@ -37,13 +49,14 @@ volname=$(createsubvolumename "$CHOICE")
 echo $volname
 
 umount /dev/sda2
-mount -o rw /dev/sda2 /media/sda2
+mount /dev/sda2 /media/sda2
 
 find $TEMP_DIR -mindepth 1 -type d -exec rm -rf '{}' \;
 
 mkdir $TEMP_DIR/$volname
 mkdir -p $BTRFS_DIR
-mount -o ro ${USB_DISK}3 $BTRFS_DIR
+modprobe btrfs
+mount -r ${USB_DISK}3 $BTRFS_DIR
 
 if [ -d $BTRFS_DIR/@${volname}/boot/firmware ];
 then
@@ -75,4 +88,6 @@ umount $TEMP_DIR
 sync
 rm -rf $BTRFS_DIR
 #rm -rf $TEMP_DIR
+sleep 60
 /etc/local.d/rebootp.bin 2
+
